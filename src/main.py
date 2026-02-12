@@ -1,4 +1,8 @@
 import sys
+import shutil
+import atexit
+import zipfile
+import tempfile
 from pathlib import Path
 
 import gi
@@ -8,7 +12,7 @@ from gi.repository import Gtk, WebKit, GLib
 
 
 class MainWindow(Gtk.Window):
-    def __init__(self):
+    def __init__(self, html_uri):
         super().__init__()
 
         self.set_titlebar(None)
@@ -26,9 +30,7 @@ class MainWindow(Gtk.Window):
         self.user_content.connect("script-message-received::pythonHandler",
                                   self.on_ui_message)
 
-        html_path = Path(__file__).parent / "ui" / "index.html"
-        self.webview.load_uri(f"file://{html_path}")
-
+        self.webview.load_uri(html_uri)
         self.set_child(self.webview)
 
         self.connect("destroy", self.on_destroy)
@@ -63,10 +65,29 @@ class MainWindow(Gtk.Window):
         return True
 
 
+def get_ui():
+    src = Path(__file__).parent / "ui"
+    if src.exists():
+        return src
+
+    temp_dir = Path(tempfile.mkdtemp())
+    atexit.register(lambda: shutil.rmtree(temp_dir, ignore_errors=True))
+    with zipfile.ZipFile(sys.argv[0], 'r') as zf:
+        for member in zf.namelist():
+            if member.startswith("ui/") and not member.endswith("/"):
+                target = temp_dir / Path(member).name
+                with open(target, "wb") as f:
+                    f.write(zf.read(member))
+    return temp_dir
+
+
 def on_activate(app):
-    win = MainWindow()
-    win.set_application(app)
-    win.present()
+    ui_path = get_ui()
+    html_uri = (ui_path / "index.html").as_uri()
+
+    window = MainWindow(html_uri)
+    window.set_application(app)
+    window.present()
 
 
 def main():
