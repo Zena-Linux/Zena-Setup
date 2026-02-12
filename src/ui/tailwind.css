@@ -1,0 +1,5 @@
+@import "tailwindcss";
+@plugin "daisyui" {
+  themes: aqua --default, aqua --prefersdark;
+}
+@plugin "tailwindcss-motion";

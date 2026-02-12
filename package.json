@@ -2,6 +2,10 @@
   "dependencies": {
     "@tailwindcss/cli": "^4.1.18",
     "daisyui": "^5.5.18",
-    "tailwindcss": "^4.1.18"
+    "tailwindcss": "^4.1.18",
+    "tailwindcss-motion": "^1.1.1"
+  },
+  "scripts": {
+    "build": "tailwindcss -i src/ui/tailwind.css -o src/ui/styles.css"
   }
 }
