@@ -72,12 +72,17 @@ def get_ui():
 
     temp_dir = Path(tempfile.mkdtemp())
     atexit.register(lambda: shutil.rmtree(temp_dir, ignore_errors=True))
-    with zipfile.ZipFile(sys.argv[0], 'r') as zf:
+
+    with zipfile.ZipFile(sys.argv[0], "r") as zf:
         for member in zf.namelist():
-            if member.startswith("ui/") and not member.endswith("/"):
-                target = temp_dir / Path(member).name
-                with open(target, "wb") as f:
-                    f.write(zf.read(member))
+            if member.startswith("ui/"):
+                if member.endswith("/"):
+                    continue
+                rel_path = Path(member).relative_to("ui")
+                target = temp_dir / rel_path
+                target.parent.mkdir(parents=True, exist_ok=True)
+                with zf.open(member) as source, open(target, "wb") as dest:
+                    shutil.copyfileobj(source, dest)
     return temp_dir
 
 

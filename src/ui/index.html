@@ -9,29 +9,28 @@
 
 <body class="bg-base-100 flex flex-col items-center justify-center p-8 text-center min-h-screen">
   <div id="welcome-screen" class="max-w-3xl w-full bg-base-300/80 backdrop-blur-xl border border-base-content/10
-    rounded-3xl shadow-2xl p-8 md:p-10 motion-blur-in motion-duration-700">
+    rounded-3xl shadow-2xl p-8 md:p-10 motion-blur-in motion-translate-y-in-150 motion-ease-spring-bouncy
+    motion-duration-700 motion-delay-500 transition-opacity duration-500">
 
     <div class="flex flex-col items-center text-center">
-      <div class="text-7xl mb-2 motion-preset-pop motion-duration-1000">
-      </div>
-      <h1 class="text-6xl font-bold md:text-7xl motion-preset-slide-up motion-duration-800">
+      <h1 class="text-6xl font-bold md:text-7xl motion-preset-slide-up motion-duration-800 motion-delay-500">
         Welcome To <span class="bg-linear-to-r from-primary to-accent bg-clip-text text-transparent">Zena</span>
       </h1>
 
       <p class="text-base-content/60 mt-2 text-sm uppercase tracking-wider
-      motion-preset-slide-up motion-duration-800 motion-delay-100">
+      motion-preset-slide-up motion-duration-800 motion-delay-600">
         <span class="text-secondary bi bi-cpu text-xl"></span> powered by cachyos lto kernel
       </p>
       <p class="text-secondary/60 mt-2 text-sm uppercase tracking-wider
-      motion-preset-slide-up motion-duration-800 motion-delay-100">
+      motion-preset-slide-up motion-duration-800 motion-delay-600">
         built on top of fedora bootc
       </p>
       <p id="output" class="text-base font-mono bg-base-200/50 px-5 py-2 rounded-box mt-6
-                                 motion-preset-slide-up motion-duration-800 motion-delay-200">
-        immutable • atomic • container-native • tiling window manager
+                                 motion-preset-slide-up motion-duration-800 motion-delay-700">
+        immutable • atomic • container-native • isolated
       </p>
       <div class="grid grid-cols-1 md:grid-cols-3 gap-6 w-full mt-12
-                        motion-preset-slide-up motion-duration-800 motion-delay-300">
+                        motion-preset-slide-up motion-duration-800 motion-delay-800">
 
         <div class="card bg-base-200/70 border border-base-content/10 transition-transform hover:scale-110">
           <div class="card-body items-center p-5">
@@ -67,7 +66,7 @@
       </div>
 
       <button id="setup-btn"
-        class="btn btn-primary btn-lg mt-12 px-12 font-mono text-lg gap-2 motion-preset-pop motion-duration-700 motion-delay-400">
+        class="btn btn-primary btn-lg mt-12 px-12 font-mono text-lg gap-2 motion-preset-pop motion-duration-700 motion-delay-900">
         <span class="bi bi-lightning-charge-fill"></span>
         Setup
       </button>
@@ -79,10 +78,9 @@
       <div class="flex flex-col items-center text-center">
 
         <div class="flex items-center gap-3 mb-6">
-          <i class="bi bi-gear-fill text-4xl"></i>
           <h2
             class="text-3xl md:text-4xl font-bold bg-linear-to-r from-primary to-accent bg-clip-text text-transparent">
-            Setup
+            KEYBOARD & LOCALE
           </h2>
         </div>
 
@@ -90,7 +88,7 @@
           <div class="w-2 h-2 rounded-full bg-primary motion-pulse"></div>
           <span class="text-xs font-bold text-primary">STEP</span>
           <span class="text-xs font-mono">1/3</span>
-          <span class="text-xs text-base-content/50 ml-1">KEYBOARD & LOCALE</span>
+          <span class="text-xs text-base-content/50 ml-1"></span>
         </div>
 
         <p class="text-base-content/60 mt-2 mb-8 text-sm">
@@ -158,50 +156,48 @@
       </div>
     </div>
   </div>
-  <div id="setup-screen-step2" class="w-full max-w-3xl hidden transition-opacity duration-500 opacity-0">
+  <div id="setup-screen-step2" class="w-full hidden transition-opacity duration-500 opacity-0">
     <div class="bg-base-300/80 backdrop-blur-xl border border-base-content/10 rounded-3xl shadow-2xl p-8 md:p-10">
       <div class="flex flex-col items-center text-center">
 
         <div class="flex items-center gap-3 mb-6">
-          <i class="bi bi-clock-fill text-4xl text-secondary"></i>
           <h2
             class="text-3xl md:text-4xl font-bold bg-linear-to-r from-primary to-accent bg-clip-text text-transparent">
-            Setup
+            TIMEZONE
           </h2>
         </div>
 
         <div class="flex items-center gap-2 bg-base-200/50 px-4 py-2 rounded-full">
-          <div class="w-2 h-2 rounded-full bg-secondary motion-pulse"></div>
-          <span class="text-xs font-bold text-secondary">STEP</span>
+          <div class="w-2 h-2 rounded-full bg-primary motion-pulse"></div>
+          <span class="text-xs font-bold text-primary">STEP</span>
           <span class="text-xs font-mono">2/3</span>
-          <span class="text-xs text-base-content/50 ml-1">TIME ZONE</span>
         </div>
 
         <p class="text-base-content/60 mt-2 mb-8 text-sm">
-          Select your time zone from the list.
+          These settings will be applied immediately when you click Next.
         </p>
 
-        <div class="w-full">
+        <div class="grid grid-cols-1 gap-6 w-full">
+
           <div class="card bg-base-200/70 border border-base-content/10">
-            <div class="card-body p-6">
-              <div class="flex items-center gap-2 mb-4">
-                <i class="text-2xl text-secondary bi bi-clock-history"></i>
-                <h3 class="font-bold text-md uppercase tracking-wider">Time Zone</h3>
+            <div class="card-body p-5">
+              <div class="flex items-center gap-2 mb-3">
+                <i class="text-2xl text-primary bi bi-clock"></i>
+                <h3 class="font-bold text-md uppercase tracking-wider">Timezones</h3>
               </div>
 
               <div class="form-control w-full">
                 <div class="relative">
                   <i class="bi bi-search absolute left-3 top-1/2 -translate-y-1/2 text-base-content/50 text-sm"></i>
-                  <input type="text" placeholder="Search time zones..."
+                  <input type="text" placeholder="Search timezones..."
                     class="input input-bordered input-sm w-full bg-base-300/50 pl-8 font-mono text-xs">
                 </div>
               </div>
 
-              <div
-                class="mt-4 p-8 bg-base-300/30 rounded-box border border-dashed border-base-content/20 flex flex-col items-center">
-                <i class="bi bi-clock text-3xl text-base-content/30"></i>
-                <p class="text-xs text-base-content/40 mt-3">No time zones found</p>
-                <p class="text-xs text-base-content/30 mt-1">(empty list – ready for timedatectl data)</p>
+              <div class="mt-4 p-6 bg-base-300/30 rounded-box border border-dashed border-base-content/20">
+                <i class="bi bi-keyboard text-2xl text-base-content/30"></i>
+                <p class="text-xs text-base-content/40 mt-2">No timezones found</p>
+                <p class="text-xs text-base-content/30 mt-1">(empty list – ready for timezone data)</p>
               </div>
             </div>
           </div>
@@ -211,10 +207,11 @@
           <button id="back-from-step2" class="btn btn-outline btn-sm font-mono gap-2">
             <i class="bi bi-arrow-left"></i> Back
           </button>
-          <button class="btn btn-primary btn-sm font-mono gap-2">
+          <button id="next-to-step3" class="btn btn-primary btn-sm font-mono gap-2">
             Next <i class="bi bi-arrow-right"></i>
           </button>
         </div>
+
       </div>
     </div>
   </div>
