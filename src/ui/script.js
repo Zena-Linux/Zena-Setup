@@ -1,4 +1,3 @@
-// Send a message to the Python bridge
 function callPython(message) {
     if (window.webkit && window.webkit.messageHandlers.pythonHandler) {
         window.webkit.messageHandlers.pythonHandler.postMessage(message);
@@ -7,12 +6,10 @@ function callPython(message) {
     }
 }
 
-// Called by Python via evaluate_javascript()
 window.receiveFromPython = function(text) {
     document.getElementById("output").innerText = text;
 };
 
-// Example bindings
 document.getElementById("btnGet").addEventListener("click", () => {
     callPython("get_data");
 });
