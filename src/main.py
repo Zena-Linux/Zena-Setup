@@ -17,6 +17,18 @@ class MainWindow(Gtk.Window):
     def __init__(self, html_uri):
         super().__init__()
 
+        css_provider = Gtk.CssProvider()
+        css_provider.load_from_data(b"""
+            window {
+                background-color: black;
+            }
+        """)
+
+        self.get_style_context().add_provider(
+            css_provider,
+            Gtk.STYLE_PROVIDER_PRIORITY_APPLICATION
+        )
+
         self.set_titlebar(None)
         self.set_decorated(False)
         self.fullscreen()
