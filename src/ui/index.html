@@ -10,7 +10,7 @@
 <body class="bg-base-100 flex flex-col items-center justify-center p-8 text-center min-h-screen">
   <div id="welcome-screen" class="max-w-3xl w-full bg-base-300/80 backdrop-blur-xl border border-base-content/10
     rounded-3xl shadow-2xl p-8 md:p-10 motion-blur-in motion-translate-y-in-150 motion-ease-spring-bouncy
-    motion-duration-700 motion-delay-500 transition-opacity duration-500">
+    motion-duration-700 motion-delay-500 transition-opacity duration-1000">
 
     <div class="flex flex-col items-center text-center">
       <h1 class="text-6xl font-bold md:text-7xl motion-preset-slide-up motion-duration-800 motion-delay-500">
@@ -31,11 +31,12 @@
       </p>
       <div class="grid grid-cols-1 md:grid-cols-3 gap-6 w-full mt-12
                         motion-preset-slide-up motion-duration-800 motion-delay-800">
-
-        <div class="card bg-base-200/70 border border-base-content/10 transition-transform hover:scale-110">
+        <div
+          class="card bg-base-200/70 border border-base-content/10 transition-all motion-preset-pop motion-duration-500 motion-delay-1000 hover:scale-110 group">
           <div class="card-body items-center p-5">
-            <i class="text-3xl text-primary bi bi-window-dock"></i>
-            <h3 class="font-bold text-sm uppercase tracking-wider mt-1">Desktop</h3>
+            <i class="text-3xl text-primary bi bi-window-dock group-hover:scale-110 transition-transform"></i>
+            <h3 class="font-bold text-sm uppercase tracking-wider mt-1 group-hover:text-primary transition-colors">
+              Desktop</h3>
             <p class="text-xs text-base-content/80 leading-relaxed">
               Dank Material Shell<br>
               niri | MangoWC
@@ -43,10 +44,12 @@
           </div>
         </div>
 
-        <div class="card bg-base-200/70 border border-base-content/10 transition-transform hover:scale-110">
+        <div
+          class="card bg-base-200/70 border border-base-content/10 transition-all motion-preset-pop motion-duration-500 motion-delay-1300 hover:scale-110 group">
           <div class="card-body items-center p-5">
-            <i class="text-3xl text-accent bi bi-shield-lock"></i>
-            <h3 class="font-bold text-sm uppercase tracking-wider mt-1">Security</h3>
+            <i class="text-3xl text-accent bi bi-shield-lock group-hover:scale-110 transition-transform"></i>
+            <h3 class="font-bold text-sm uppercase tracking-wider mt-1 group-hover:text-accent transition-colors">
+              Security</h3>
             <p class="text-xs text-base-content/80 leading-relaxed">
               Encrypted Home<br>
               Secure Boot
@@ -54,10 +57,12 @@
           </div>
         </div>
 
-        <div class="card bg-base-200/70 border border-base-content/10 transition-transform hover:scale-110">
+        <div
+          class="card bg-base-200/70 border border-base-content/10 transition-all motion-preset-pop motion-duration-500 motion-delay-1600 hover:scale-110 group">
           <div class="card-body items-center p-5">
-            <i class="text-3xl text-secondary bi bi-boxes"></i>
-            <h3 class="font-bold text-sm uppercase tracking-wider mt-1">Package Manager</h3>
+            <i class="text-3xl text-secondary bi bi-boxes group-hover:scale-110 transition-transform"></i>
+            <h3 class="font-bold text-sm uppercase tracking-wider mt-1 group-hover:text-secondary transition-colors">
+              Package Manager</h3>
             <p class="text-xs text-base-content/80 leading-relaxed">
               Nix | Zix
             </p>
@@ -210,6 +215,134 @@
           <button id="next-to-step3" class="btn btn-primary btn-sm font-mono gap-2">
             Next <i class="bi bi-arrow-right"></i>
           </button>
+        </div>
+
+      </div>
+    </div>
+  </div>
+
+  <div id="setup-screen-step3" class="w-full hidden transition-opacity duration-500 opacity-0">
+    <div class="bg-base-300/80 backdrop-blur-xl border border-base-content/10 rounded-3xl shadow-2xl p-8 md:p-10">
+      <div class="flex flex-col items-center text-center">
+
+        <div class="flex items-center gap-3 mb-6">
+          <h2
+            class="text-3xl md:text-4xl font-bold bg-linear-to-r from-primary to-accent bg-clip-text text-transparent">
+            CREATE USER
+          </h2>
+        </div>
+
+        <div class="flex items-center gap-2 bg-base-200/50 px-4 py-2 rounded-full">
+          <div class="w-2 h-2 rounded-full bg-primary motion-pulse"></div>
+          <span class="text-xs font-bold text-primary">STEP</span>
+          <span class="text-xs font-mono">3/3</span>
+        </div>
+
+        <p class="text-base-content/60 mt-2 mb-8 text-sm">
+          Enter account details. Home size is flexible.
+        </p>
+
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-6 w-full">
+          <div class="card bg-base-200/70 border border-base-content/10">
+            <div class="card-body p-5 text-left">
+              <div class="flex items-center gap-2 mb-4">
+                <i class="text-2xl text-primary bi bi-person"></i>
+                <h3 class="font-bold text-md uppercase tracking-wider">Account</h3>
+              </div>
+              <div class="form-control w-full mb-2">
+                <label class="label px-1 py-0">
+                  <span class="label-text text-xs opacity-80">Full name</span>
+                </label>
+                <div class="relative">
+                  <i class="bi bi-person absolute left-3 top-1/2 -translate-y-1/2 text-base-content/50 text-sm"></i>
+                  <input type="text" id="fullname"
+                    class="input input-bordered w-full bg-base-300/50 pl-8 font-mono text-xs">
+                </div>
+              </div>
+
+              <div class="form-control w-full mb-2">
+                <label class="label px-1 py-0">
+                  <span class="label-text text-xs opacity-80">Username</span>
+                </label>
+                <div class="relative">
+                  <i class="bi bi-at absolute left-3 top-1/2 -translate-y-1/2 text-base-content/50 text-sm"></i>
+                  <input type="text" id="username"
+                    class="input input-bordered w-full bg-base-300/50 pl-8 font-mono text-xs">
+                </div>
+              </div>
+
+              <div class="form-control w-full mb-2">
+                <label class="label px-1 py-0">
+                  <span class="label-text text-xs opacity-80">Password</span>
+                </label>
+                <div class="relative">
+                  <i class="bi bi-lock absolute left-3 top-1/2 -translate-y-1/2 text-base-content/50 text-sm"></i>
+                  <input type="password" id="password"
+                    class="input input-bordered w-full bg-base-300/50 pl-8 font-mono text-xs">
+                </div>
+              </div>
+
+              <div class="form-control w-full">
+                <label class="label px-1 py-0">
+                  <span class="label-text text-xs opacity-80">Retype password</span>
+                </label>
+                <div class="relative">
+                  <i class="bi bi-lock-fill absolute left-3 top-1/2 -translate-y-1/2 text-base-content/50 text-sm"></i>
+                  <input type="password" id="retype-password"
+                    class="input input-bordered w-full bg-base-300/50 pl-8 font-mono text-xs">
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="card bg-base-200/70 border border-base-content/10">
+            <div class="card-body p-5 text-left">
+              <div class="flex items-center gap-2 mb-4">
+                <i class="text-2xl text-accent bi bi-house-heart"></i>
+                <h3 class="font-bold text-md uppercase tracking-wider">Home size</h3>
+              </div>
+
+              <div class="w-full py-4">
+                <div class="flex justify-between items-center mb-2">
+                  <span class="text-xs font-mono bg-base-300 px-3 py-1 rounded-full">/home</span>
+                  <span
+                    class="text-sm font-bold font-mono bg-primary/20 text-primary px-4 py-1.5 rounded-full shadow-sm">
+                    <span id="home-size-value">32</span> GB
+                  </span>
+                </div>
+
+                <input type="range" id="home-size-slider" min="8" max="512" value="32" step="8"
+                  class="range range-primary range-sm w-full mt-2" />
+
+                <div class="flex justify-between text-xs px-1 mt-1 text-base-content/60 font-mono">
+                  <span>8 GB</span>
+                  <span>128 GB</span>
+                  <span>256 GB</span>
+                  <span>512 GB</span>
+                </div>
+
+                <div
+                  class="mt-6 flex items-center gap-2 bg-base-300/30 p-3 rounded-box border border-dashed border-base-content/20">
+                  <i class="bi bi-database text-base-content/40"></i>
+                  <p class="text-xs text-base-content/50">Encrypted home will use this capacity.</p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="flex justify-between w-full mt-10">
+          <button id="back-from-step3" class="btn btn-outline btn-sm font-mono gap-2">
+            <i class="bi bi-arrow-left"></i> Back
+          </button>
+          <button id="complete-setup"
+            class="btn btn-primary btn-sm font-mono gap-2 bg-linear-to-r from-primary to-accent border-0">
+            <i class="bi bi-check2-circle"></i> Complete
+          </button>
+        </div>
+
+        <div id="password-hint" class="text-xs text-error/70 mt-4 font-mono hidden">
+          <i class="bi bi-exclamation-triangle"></i> Passwords do not match
         </div>
 
       </div>
