@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html class="bg-black">
+<html style="background-color: black;">
 
 <head>
   <meta charset="UTF-8">
@@ -7,32 +7,32 @@
   <link rel="stylesheet" href="css/bootstrap-icons.min.css">
 </head>
 
-<body class="bg-base-100 flex flex-col items-center justify-center p-8 text-center min-h-screen motion-preset-fade motion-delay-100">
-  <div id="welcome-screen" class="max-w-3xl w-full bg-base-300/80 backdrop-blur-xl border border-base-content/10
+<body class="bg-base-100 flex flex-col items-center justify-center p-8 text-center min-h-screen motion-preset-fade motion-duration-1000 motion-delay-100">
+  <div id="welcome-screen" class="max-w-3xl hidden w-full bg-base-300/80 backdrop-blur-xl border border-base-content/10
     rounded-3xl shadow-2xl p-8 md:p-10 motion-blur-in motion-translate-y-in-150 motion-ease-spring-bouncy
-    motion-duration-700 motion-delay-500 transition-opacity duration-1000">
+    motion-duration-700 transition-opacity duration-500">
 
     <div class="flex flex-col items-center text-center">
-      <h1 class="text-6xl font-bold md:text-7xl motion-preset-slide-up motion-duration-800 motion-delay-500">
+      <h1 class="text-6xl font-bold md:text-7xl motion-preset-slide-up motion-duration-1000 motion-delay-100">
         Welcome To <span class="bg-linear-to-r from-primary to-accent bg-clip-text text-transparent">Zena</span>
       </h1>
 
       <p class="text-base-content/60 mt-2 text-sm uppercase tracking-wider
-      motion-preset-slide-up motion-duration-800 motion-delay-600">
+      motion-preset-slide-up motion-duration-1000 motion-delay-200">
         <span class="text-primary bi bi-cpu text-xl"></span> powered by cachyos lto kernel
       </p>
       <p class="text-secondary/60 mt-2 text-sm uppercase tracking-wider
-      motion-preset-slide-up motion-duration-800 motion-delay-600">
+      motion-preset-slide-up motion-duration-1000 motion-delay-200">
         built on top of fedora bootc
       </p>
       <p id="output" class="text-base font-mono bg-base-200/50 px-5 py-2 rounded-box mt-6
-                                 motion-preset-slide-up motion-duration-800 motion-delay-700">
+                                 motion-preset-slide-up motion-duration-1000 motion-delay-300">
         immutable • atomic • container-native • isolated
       </p>
       <div class="grid grid-cols-1 md:grid-cols-3 gap-6 w-full mt-12
-                        motion-preset-slide-up motion-duration-800 motion-delay-800">
+                        motion-preset-slide-up motion-duration-1000 motion-delay-400">
         <div
-          class="card bg-base-200/70 border border-base-content/10 transition-all motion-preset-pop motion-duration-500 motion-delay-1000 hover:scale-110 group">
+          class="card bg-base-200/70 border border-base-content/10 transition-all motion-preset-pop motion-duration-500 motion-delay-600 hover:scale-110 group">
           <div class="card-body items-center p-5">
             <i class="text-3xl text-primary bi bi-window-dock group-hover:scale-110 transition-transform"></i>
             <h3 class="font-bold text-sm uppercase tracking-wider mt-1 group-hover:text-primary transition-colors">
@@ -45,7 +45,7 @@
         </div>
 
         <div
-          class="card bg-base-200/70 border border-base-content/10 transition-all motion-preset-pop motion-duration-500 motion-delay-1300 hover:scale-110 group">
+          class="card bg-base-200/70 border border-base-content/10 transition-all motion-preset-pop motion-duration-500 motion-delay-900 hover:scale-110 group">
           <div class="card-body items-center p-5">
             <i class="text-3xl text-accent bi bi-shield-lock group-hover:scale-110 transition-transform"></i>
             <h3 class="font-bold text-sm uppercase tracking-wider mt-1 group-hover:text-accent transition-colors">
@@ -58,7 +58,7 @@
         </div>
 
         <div
-          class="card bg-base-200/70 border border-base-content/10 transition-all motion-preset-pop motion-duration-500 motion-delay-1600 hover:scale-110 group">
+          class="card bg-base-200/70 border border-base-content/10 transition-all motion-preset-pop motion-duration-500 motion-delay-1200 hover:scale-110 group">
           <div class="card-body items-center p-5">
             <i class="text-3xl text-secondary bi bi-boxes group-hover:scale-110 transition-transform"></i>
             <h3 class="font-bold text-sm uppercase tracking-wider mt-1 group-hover:text-secondary transition-colors">
@@ -71,7 +71,7 @@
       </div>
 
       <button id="setup-btn"
-        class="btn btn-primary btn-lg mt-12 px-12 font-mono text-lg gap-2 motion-preset-pop motion-duration-700 motion-delay-900">
+        class="btn btn-primary btn-lg mt-12 px-12 font-mono text-lg gap-2 motion-preset-pop motion-duration-700 motion-delay-500">
         <span class="bi bi-lightning-charge-fill"></span>
         Setup
       </button>

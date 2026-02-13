@@ -10,7 +10,7 @@ from core import (send_locale_list, send_keymap_list,
 import gi
 gi.require_version('Gtk', '4.0')
 gi.require_version('WebKit', '6.0')
-from gi.repository import Gtk, WebKit, GLib
+from gi.repository import Gtk, Gdk, WebKit, GLib
 
 
 class MainWindow(Gtk.Window):
@@ -35,6 +35,10 @@ class MainWindow(Gtk.Window):
 
         self.user_content = WebKit.UserContentManager()
         self.webview = WebKit.WebView(user_content_manager=self.user_content)
+
+        rgba = Gdk.RGBA()
+        rgba.parse("black")
+        self.webview.set_background_color(rgba)
 
         settings = self.webview.get_settings()
         settings.set_enable_developer_extras(True)

@@ -7,7 +7,6 @@
       "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
     --font-mono: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono",
       "Courier New", monospace;
-    --color-black: #000;
     --spacing: 0.25rem;
     --container-3xl: 48rem;
     --text-xs: 0.75rem;
@@ -1002,9 +1001,6 @@
       background-color: color-mix(in oklab, var(--color-base-300) 80%, transparent);
     }
   }
-  .bg-black {
-    background-color: var(--color-black);
-  }
   .bg-primary {
     background-color: var(--color-primary);
   }
@@ -1241,10 +1237,6 @@
     --tw-duration: 500ms;
     transition-duration: 500ms;
   }
-  .duration-1000 {
-    --tw-duration: 1000ms;
-    transition-duration: 1000ms;
-  }
   .btn-outline {
     @layer daisyui.l1 {
       &:not( .btn-active, :hover, :active:focus, :focus-visible, input:checked:not(.filter .btn), :disabled, [disabled], .btn-disabled ) {
@@ -1300,29 +1292,26 @@
   .motion-delay-100 {
     --motion-delay: 100ms;
   }
+  .motion-delay-200 {
+    --motion-delay: 200ms;
+  }
+  .motion-delay-300 {
+    --motion-delay: 300ms;
+  }
+  .motion-delay-400 {
+    --motion-delay: 400ms;
+  }
   .motion-delay-500 {
     --motion-delay: 500ms;
   }
   .motion-delay-600 {
     --motion-delay: 600ms;
   }
-  .motion-delay-700 {
-    --motion-delay: 700ms;
-  }
-  .motion-delay-800 {
-    --motion-delay: 800ms;
-  }
   .motion-delay-900 {
     --motion-delay: 900ms;
   }
-  .motion-delay-1000 {
-    --motion-delay: 1000ms;
-  }
-  .motion-delay-1300 {
-    --motion-delay: 1300ms;
-  }
-  .motion-delay-1600 {
-    --motion-delay: 1600ms;
+  .motion-delay-1200 {
+    --motion-delay: 1200ms;
   }
   .motion-duration-500 {
     --motion-duration: 500ms;
@@ -1330,8 +1319,8 @@
   .motion-duration-700 {
     --motion-duration: 700ms;
   }
-  .motion-duration-800 {
-    --motion-duration: 800ms;
+  .motion-duration-1000 {
+    --motion-duration: 1000ms;
   }
   .radio-primary {
     @layer daisyui.l1.l2 {

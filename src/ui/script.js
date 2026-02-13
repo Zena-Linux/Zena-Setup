@@ -126,3 +126,7 @@ callPython('get_keymap_list');
 callPython('get_locale_list');
 callPython('get_timezone_list');
 callPython('get_free_space');
+
+setTimeout(function() {
+  welcomeScreen.classList.remove('hidden');
+}, 1100);
