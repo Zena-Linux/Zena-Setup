@@ -1,3 +1,4 @@
+import shutil
 import subprocess
 
 
@@ -50,3 +51,17 @@ def send_timezone_list(self):
     except FileNotFoundError:
         print("timedatectl command not found")
         self.send_to_ui("timezones:NOT_FOUND")
+
+
+def send_free_space(self=None):
+    """Send free space in GB"""
+    try:
+        path = "/var"
+        usage = shutil.disk_usage(path)
+
+        free_gb = int(usage.free / (10**9))
+        self.send_to_ui(f"free_space:{free_gb}")
+
+    except Exception as e:
+        print(f"Error: {e}")
+        self.send_to_ui("free_space:ERROR")

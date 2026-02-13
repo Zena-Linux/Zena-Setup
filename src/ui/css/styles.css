@@ -1325,9 +1325,9 @@
       --input-color: var(--color-primary);
     }
   }
-  .range-sm {
+  .range-lg {
     @layer daisyui.l1.l2 {
-      --range-thumb-size: calc(var(--size-selector, 0.25rem) * 5);
+      --range-thumb-size: calc(var(--size-selector, 0.25rem) * 7);
     }
   }
   .group-hover\:scale-110 {

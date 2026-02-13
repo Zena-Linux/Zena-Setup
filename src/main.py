@@ -4,7 +4,8 @@ import atexit
 import zipfile
 import tempfile
 from pathlib import Path
-from core import send_locale_list, send_keymap_list, send_timezone_list
+from core import (send_locale_list, send_keymap_list,
+                  send_timezone_list, send_free_space)
 
 import gi
 gi.require_version('Gtk', '4.0')
@@ -43,11 +44,15 @@ class MainWindow(Gtk.Window):
 
         match request:
             case "get_locale_list":
-                send_locale_list(self)
+                GLib.idle_add(lambda: send_locale_list(self))
             case "get_keymap_list":
-                send_keymap_list(self)
+                GLib.idle_add(lambda: send_keymap_list(self))
             case "get_timezone_list":
-                send_timezone_list(self)
+                GLib.idle_add(lambda: send_timezone_list(self))
+            case "get_free_space":
+                GLib.idle_add(lambda: send_free_space(self))
+            case _:
+                print(f"Unknown request: {request}")
 
     def send_to_ui(self, text):
         script = f"window.receiveFromPython?.('{text}')"

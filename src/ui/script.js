@@ -14,6 +14,10 @@ const keymapContainer = document.getElementById('keymap-container');
 const localeContainer = document.getElementById('locale-container');
 const timezoneContainer = document.getElementById('timezone-container');
 
+const homeSizeSlider = document.getElementById('home-size-slider');
+const homeSizeValue = document.getElementById('home-size-value');
+const homeSizeMax = document.getElementById('home-size-max');
+
 function callPython(message) {
   if (window.webkit && window.webkit.messageHandlers.pythonHandler) {
     window.webkit.messageHandlers.pythonHandler.postMessage(message);
@@ -39,6 +43,16 @@ window.receiveFromPython = function(text) {
     const data = text.substring(10);
     const timezones = data.split(',');
     populateContainer(timezoneContainer, timezones, "timezone")
+  }
+  else if (text.startsWith("free_space:")) {
+    const freeSpace = parseInt(text.substring(11));
+    homeSizeSlider.max = freeSpace;
+    homeSizeMax.textContent = `${freeSpace} GB`;
+
+    if (parseInt(homeSizeSlider.value) > freeSpace) {
+      homeSizeSlider.value = freeSpace;
+      homeSizeValue.textContent = freeSpace;
+    }
   }
 };
 
@@ -99,6 +113,10 @@ backFromStep3.addEventListener('click', function() {
   pageTransition(step3, step2)
 });
 
+homeSizeSlider.addEventListener('input', function() {
+  homeSizeValue.textContent = this.value;
+});
+
 welcomeScreen.style.opacity = '1';
 step1.style.opacity = '0';
 step2.style.opacity = '0';
@@ -107,3 +125,4 @@ step3.style.opacity = '0';
 callPython('get_keymap_list');
 callPython('get_locale_list');
 callPython('get_timezone_list');
+callPython('get_free_space');
