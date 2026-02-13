@@ -18,8 +18,8 @@ def send_locale_list(self):
         self.send_to_ui("locales:NOT_FOUND")
 
 
-def send_keyboard_list(self):
-    """Get list of available keyboard layouts from localectl and send to UI"""
+def send_keymap_list(self):
+    """Get list of available keymaps from localectl and send to UI"""
     try:
         result = subprocess.run(['localectl', 'list-keymaps'],
                                 capture_output=True, text=True, check=True)

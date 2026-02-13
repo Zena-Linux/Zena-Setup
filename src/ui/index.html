@@ -19,7 +19,7 @@
 
       <p class="text-base-content/60 mt-2 text-sm uppercase tracking-wider
       motion-preset-slide-up motion-duration-800 motion-delay-600">
-        <span class="text-secondary bi bi-cpu text-xl"></span> powered by cachyos lto kernel
+        <span class="text-primary bi bi-cpu text-xl"></span> powered by cachyos lto kernel
       </p>
       <p class="text-secondary/60 mt-2 text-sm uppercase tracking-wider
       motion-preset-slide-up motion-duration-800 motion-delay-600">
@@ -85,12 +85,12 @@
         <div class="flex items-center gap-3 mb-6">
           <h2
             class="text-3xl md:text-4xl font-bold bg-linear-to-r from-primary to-accent bg-clip-text text-transparent">
-            KEYBOARD & LOCALE
+            KEYMAP & LOCALE
           </h2>
         </div>
 
         <div class="flex items-center gap-2 bg-base-200/50 px-4 py-2 rounded-full">
-          <div class="w-2 h-2 rounded-full bg-primary motion-pulse"></div>
+          <div class="w-2 h-2 rounded-full bg-primary"></div>
           <span class="text-xs font-bold text-primary">STEP</span>
           <span class="text-xs font-mono">1/3</span>
           <span class="text-xs text-base-content/50 ml-1"></span>
@@ -106,24 +106,23 @@
             <div class="card-body p-5">
               <div class="flex items-center gap-2 mb-3">
                 <i class="text-2xl text-primary bi bi-keyboard"></i>
-                <h3 class="font-bold text-md uppercase tracking-wider">Keyboard</h3>
+                <h3 class="font-bold text-md uppercase tracking-wider">Keymap</h3>
               </div>
 
-              <div class="form-control w-full">
+              <div class="w-full">
                 <div class="relative">
                   <i class="bi bi-search absolute left-3 top-1/2 -translate-y-1/2 text-base-content/50 text-sm"></i>
-                  <input type="text" placeholder="Search keyboard layouts..."
+                  <input type="text" placeholder="Search keymaps..."
                     class="input input-bordered input-sm w-full bg-base-300/50 pl-8 font-mono text-xs">
                 </div>
               </div>
 
-              <div class="mt-4 p-6 bg-base-300/30 rounded-box border border-dashed border-base-content/20">
-                <i class="bi bi-keyboard text-2xl text-base-content/30"></i>
-                <p class="text-xs text-base-content/40 mt-2">No layouts found</p>
-                <p class="text-xs text-base-content/30 mt-1">(empty list – ready for keyboard data)</p>
+              <div class="mt-4 px-6 bg-base-300/30 rounded-box border border-dashed border-base-content/20">
+                <div id="keymap-container" class="flex flex-col max-h-72 overflow-auto"></div>
               </div>
             </div>
           </div>
+
 
           <div class="card bg-base-200/70 border border-base-content/10">
             <div class="card-body p-5">
@@ -132,7 +131,7 @@
                 <h3 class="font-bold text-md uppercase tracking-wider">Locale</h3>
               </div>
 
-              <div class="form-control w-full">
+              <div class="w-full">
                 <div class="relative">
                   <i class="bi bi-search absolute left-3 top-1/2 -translate-y-1/2 text-base-content/50 text-sm"></i>
                   <input type="text" placeholder="Search locales..."
@@ -140,10 +139,8 @@
                 </div>
               </div>
 
-              <div class="mt-4 p-6 bg-base-300/30 rounded-box border border-dashed border-base-content/20">
-                <i class="bi bi-globe text-2xl text-base-content/30"></i>
-                <p class="text-xs text-base-content/40 mt-2">No locales found</p>
-                <p class="text-xs text-base-content/30 mt-1">(empty list – ready for locale data)</p>
+              <div class="mt-4 px-6 bg-base-300/30 rounded-box border border-dashed border-base-content/20">
+                <div id="locale-container" class="flex flex-col max-h-72 overflow-auto"></div>
               </div>
             </div>
           </div>
@@ -173,8 +170,8 @@
         </div>
 
         <div class="flex items-center gap-2 bg-base-200/50 px-4 py-2 rounded-full">
-          <div class="w-2 h-2 rounded-full bg-primary motion-pulse"></div>
-          <span class="text-xs font-bold text-primary">STEP</span>
+          <div class="w-2 h-2 rounded-full bg-accent"></div>
+          <span class="text-xs font-bold text-accent">STEP</span>
           <span class="text-xs font-mono">2/3</span>
         </div>
 
@@ -187,11 +184,11 @@
           <div class="card bg-base-200/70 border border-base-content/10">
             <div class="card-body p-5">
               <div class="flex items-center gap-2 mb-3">
-                <i class="text-2xl text-primary bi bi-clock"></i>
-                <h3 class="font-bold text-md uppercase tracking-wider">Timezones</h3>
+                <i class="text-2xl text-secondary bi bi-clock"></i>
+                <h3 class="font-bold text-md uppercase tracking-wider">Timezone</h3>
               </div>
 
-              <div class="form-control w-full">
+              <div class="w-full">
                 <div class="relative">
                   <i class="bi bi-search absolute left-3 top-1/2 -translate-y-1/2 text-base-content/50 text-sm"></i>
                   <input type="text" placeholder="Search timezones..."
@@ -199,10 +196,8 @@
                 </div>
               </div>
 
-              <div class="mt-4 p-6 bg-base-300/30 rounded-box border border-dashed border-base-content/20">
-                <i class="bi bi-keyboard text-2xl text-base-content/30"></i>
-                <p class="text-xs text-base-content/40 mt-2">No timezones found</p>
-                <p class="text-xs text-base-content/30 mt-1">(empty list – ready for timezone data)</p>
+              <div class="mt-4 px-6 bg-base-300/30 rounded-box border border-dashed border-base-content/20">
+                <div id="timezone-container" class="flex flex-col max-h-72 overflow-auto"></div>
               </div>
             </div>
           </div>
@@ -233,8 +228,8 @@
         </div>
 
         <div class="flex items-center gap-2 bg-base-200/50 px-4 py-2 rounded-full">
-          <div class="w-2 h-2 rounded-full bg-primary motion-pulse"></div>
-          <span class="text-xs font-bold text-primary">STEP</span>
+          <div class="w-2 h-2 rounded-full bg-secondary"></div>
+          <span class="text-xs font-bold text-secondary">STEP</span>
           <span class="text-xs font-mono">3/3</span>
         </div>
 
@@ -337,7 +332,7 @@
           </button>
           <button id="complete-setup"
             class="btn btn-primary btn-sm font-mono gap-2 bg-linear-to-r from-primary to-accent border-0">
-            <i class="bi bi-check2-circle"></i> Complete
+            <i class="bi bi-check-circle-fill"></i> Complete
           </button>
         </div>
 

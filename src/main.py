@@ -4,6 +4,7 @@ import atexit
 import zipfile
 import tempfile
 from pathlib import Path
+from core import send_locale_list, send_keymap_list, send_timezone_list
 
 import gi
 gi.require_version('Gtk', '4.0')
@@ -28,7 +29,7 @@ class MainWindow(Gtk.Window):
 
         self.user_content.register_script_message_handler("pythonHandler")
         self.user_content.connect("script-message-received::pythonHandler",
-                                  self.on_ui_message)
+                                  self.on_ui_request)
 
         self.webview.load_uri(html_uri)
         self.set_child(self.webview)
@@ -36,16 +37,17 @@ class MainWindow(Gtk.Window):
         self.connect("destroy", self.on_destroy)
         self.webview.connect("load-failed", self.on_load_failed)
 
-    def on_ui_message(self, user_content, js_result):
-        message = js_result.to_string()
-        print(f"Message from JS: {message}")
+    def on_ui_request(self, user_content, js_result):
+        request = js_result.to_string()
+        print(f"Request from UI: {request}")
 
-        if message == "get_data":
-            self.send_to_ui("Hello from Python!")
-        elif message.startswith("add:"):
-            _, a, b = message.split(":")
-            result = int(a) + int(b)
-            self.send_to_ui(f"Result: {result}")
+        match request:
+            case "get_locale_list":
+                send_locale_list(self)
+            case "get_keymap_list":
+                send_keymap_list(self)
+            case "get_timezone_list":
+                send_timezone_list(self)
 
     def send_to_ui(self, text):
         script = f"window.receiveFromPython?.('{text}')"

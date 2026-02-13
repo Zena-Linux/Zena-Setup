@@ -10,6 +10,10 @@ const backFromStep2 = document.getElementById('back-from-step2');
 const nextToStep3 = document.getElementById('next-to-step3');
 const backFromStep3 = document.getElementById('back-from-step3');
 
+const keymapContainer = document.getElementById('keymap-container');
+const localeContainer = document.getElementById('locale-container');
+const timezoneContainer = document.getElementById('timezone-container');
+
 function callPython(message) {
   if (window.webkit && window.webkit.messageHandlers.pythonHandler) {
     window.webkit.messageHandlers.pythonHandler.postMessage(message);
@@ -19,8 +23,46 @@ function callPython(message) {
 }
 
 window.receiveFromPython = function(text) {
-  console.log(text)
+  console.log("Received from Python:", text);
+
+  if (text.startsWith("keymaps:")) {
+    const data = text.substring(8);
+    const keymaps = data.split(',');
+    populateContainer(keymapContainer, keymaps, "keymap")
+  }
+  else if (text.startsWith("locales:")) {
+    const data = text.substring(8);
+    const locales = data.split(',');
+    populateContainer(localeContainer, locales, "locale")
+  }
+  else if (text.startsWith("timezones:")) {
+    const data = text.substring(10);
+    const timezones = data.split(',');
+    populateContainer(timezoneContainer, timezones, "timezone")
+  }
 };
+
+function populateContainer(container, list, name) {
+  container.innerHTML = '';
+
+  list.forEach((item, index) => {
+    const label = document.createElement('label');
+    label.className = 'label cursor-pointer justify-start gap-3 py-2 hover:bg-base-200/50 rounded-lg transition-colors';
+    const radio = document.createElement('input');
+    radio.type = 'radio';
+    radio.name = name;
+    radio.className = 'radio radio-primary radio-sm';
+    if (index === 0) radio.checked = true;
+
+    const span = document.createElement('span');
+    span.className = 'label-text font-mono text-xs';
+    span.textContent = item;
+
+    label.appendChild(radio);
+    label.appendChild(span);
+    container.appendChild(label);
+  });
+}
 
 function pageTransition(page_a, page_b) {
   page_a.style.opacity = '0';
@@ -33,14 +75,35 @@ function pageTransition(page_a, page_b) {
   }, 300);
 }
 
-setupBtn.addEventListener('click', function() { pageTransition(welcomeScreen, step1) });
-backFromStep1.addEventListener('click', function() { pageTransition(step1, welcomeScreen) });
-nextToStep2.addEventListener('click', function() { pageTransition(step1, step2) });
-backFromStep2.addEventListener('click', function() { pageTransition(step2, step1) });
-nextToStep3.addEventListener('click', function() { pageTransition(step2, step3) });
-backFromStep3.addEventListener('click', function() { pageTransition(step3, step2) });
+setupBtn.addEventListener('click', function() {
+  pageTransition(welcomeScreen, step1);
+});
+
+backFromStep1.addEventListener('click', function() {
+  pageTransition(step1, welcomeScreen)
+});
+
+nextToStep2.addEventListener('click', function() {
+  pageTransition(step1, step2)
+});
+
+backFromStep2.addEventListener('click', function() {
+  pageTransition(step2, step1)
+});
+
+nextToStep3.addEventListener('click', function() {
+  pageTransition(step2, step3)
+});
+
+backFromStep3.addEventListener('click', function() {
+  pageTransition(step3, step2)
+});
 
 welcomeScreen.style.opacity = '1';
 step1.style.opacity = '0';
 step2.style.opacity = '0';
 step3.style.opacity = '0';
+
+callPython('get_keymap_list');
+callPython('get_locale_list');
+callPython('get_timezone_list');
