@@ -7,14 +7,16 @@
   <link rel="stylesheet" href="css/bootstrap-icons.min.css">
 </head>
 
-<body class="bg-base-100 flex flex-col items-center justify-center p-8 text-center min-h-screen motion-preset-fade motion-duration-1000 motion-delay-100">
+<body
+  class="bg-base-100 flex flex-col items-center justify-center p-8 text-center h-screen
+  motion-preset-fade motion-duration-1000 motion-delay-100">
   <div id="welcome-screen" class="max-w-3xl hidden w-full bg-base-300/80 backdrop-blur-xl border border-base-content/10
     rounded-3xl shadow-2xl p-8 md:p-10 motion-blur-in motion-translate-y-in-150 motion-ease-spring-bouncy
     motion-duration-700 transition-opacity duration-500">
 
     <div class="flex flex-col items-center text-center">
       <h1 class="text-6xl font-bold md:text-7xl motion-preset-slide-up motion-duration-1000 motion-delay-100">
-        Welcome To <span class="bg-linear-to-r from-primary to-accent bg-clip-text text-transparent">Zena</span>
+        Introducing <span class="bg-linear-to-r from-primary to-accent bg-clip-text text-transparent">Zena</span>
       </h1>
 
       <p class="text-base-content/60 mt-2 text-sm uppercase tracking-wider
@@ -73,7 +75,7 @@
       <button id="setup-btn"
         class="btn btn-primary btn-lg mt-12 px-12 font-mono text-lg gap-2 motion-preset-pop motion-duration-700 motion-delay-500">
         <span class="bi bi-lightning-charge-fill"></span>
-        Setup
+        Proceed to Setup
       </button>
     </div>
   </div>
@@ -110,11 +112,10 @@
               </div>
 
               <div class="w-full">
-                <div class="relative">
-                  <i class="bi bi-search absolute left-3 top-1/2 -translate-y-1/2 text-base-content/50 text-sm"></i>
-                  <input type="text" placeholder="Search keymaps..."
-                    class="input input-bordered input-sm w-full bg-base-300/50 pl-8 font-mono text-xs">
-                </div>
+                <label class="input bg-base-300/50 w-full">
+                  <i class="bi bi-search"></i>
+                  <input id="keymap-search" type="search" required placeholder="Search keymaps..." />
+                </label>
               </div>
 
               <div class="mt-4 px-6 bg-base-300/30 rounded-box border border-dashed border-base-content/20">
@@ -132,11 +133,10 @@
               </div>
 
               <div class="w-full">
-                <div class="relative">
-                  <i class="bi bi-search absolute left-3 top-1/2 -translate-y-1/2 text-base-content/50 text-sm"></i>
-                  <input type="text" placeholder="Search locales..."
-                    class="input input-bordered input-sm w-full bg-base-300/50 pl-8 font-mono text-xs">
-                </div>
+                <label class="input bg-base-300/50 w-full">
+                  <i class="bi bi-search"></i>
+                  <input id="locale-search" type="search" required placeholder="Search locales..." />
+                </label>
               </div>
 
               <div class="mt-4 px-6 bg-base-300/30 rounded-box border border-dashed border-base-content/20">
@@ -189,11 +189,10 @@
               </div>
 
               <div class="w-full">
-                <div class="relative">
-                  <i class="bi bi-search absolute left-3 top-1/2 -translate-y-1/2 text-base-content/50 text-sm"></i>
-                  <input type="text" placeholder="Search timezones..."
-                    class="input input-bordered input-sm w-full bg-base-300/50 pl-8 font-mono text-xs">
-                </div>
+                <label class="input bg-base-300/50 w-full">
+                  <i class="bi bi-search"></i>
+                  <input id="timezone-search" type="search" required placeholder="Search timezones..." />
+                </label>
               </div>
 
               <div class="mt-4 px-6 bg-base-300/30 rounded-box border border-dashed border-base-content/20">
@@ -244,48 +243,61 @@
                 <i class="text-2xl text-primary bi bi-person"></i>
                 <h3 class="font-bold text-md uppercase tracking-wider">Account</h3>
               </div>
-              <div class="form-control w-full mb-2">
-                <label class="label px-1 py-0">
-                  <span class="label-text text-xs opacity-80">Full name</span>
+
+              <span class="text-xs opacity-80">Full name</span>
+              <div class="w-full mb-2">
+                <label class="input validator bg-base-300/50 w-full">
+                  <i class="bi bi-person"></i>
+                  <input type="text" required placeholder="Full name" minlength="3" />
                 </label>
-                <div class="relative">
-                  <i class="bi bi-person absolute left-3 top-1/2 -translate-y-1/2 text-base-content/50 text-sm"></i>
-                  <input type="text" id="fullname"
-                    class="input input-bordered w-full bg-base-300/50 pl-8 font-mono text-xs">
-                </div>
+                <p class="validator-hint hidden">
+                  Must be atleast 3 characters
+                </p>
               </div>
 
-              <div class="form-control w-full mb-2">
-                <label class="label px-1 py-0">
-                  <span class="label-text text-xs opacity-80">Username</span>
+              <span class="text-xs opacity-80">Username</span>
+              <div class="w-full mb-2">
+                <label class="input validator bg-base-300/50 w-full">
+                  <i class="bi bi-at"></i>
+                  <input type="text" required placeholder="Username" pattern="[A-Za-z][A-Za-z0-9\-_]*" minlength="3"
+                    maxlength="32" title="Only letters, numbers or dash" />
                 </label>
-                <div class="relative">
-                  <i class="bi bi-at absolute left-3 top-1/2 -translate-y-1/2 text-base-content/50 text-sm"></i>
-                  <input type="text" id="username"
-                    class="input input-bordered w-full bg-base-300/50 pl-8 font-mono text-xs">
-                </div>
+                <p class="validator-hint hidden">
+                  Must be 3 to 32 characters
+                  <br />containing only letters, numbers or dash
+                </p>
               </div>
 
-              <div class="form-control w-full mb-2">
-                <label class="label px-1 py-0">
-                  <span class="label-text text-xs opacity-80">Password</span>
+              <span class="text-xs opacity-80">Password</span>
+              <div class="w-full mb-2">
+                <label class="input validator bg-base-300/50 w-full">
+                  <i class="bi bi-lock"></i>
+                  <input type="password" required placeholder="Password" minlength="8" pattern=".{8,}" />
+                  <label class="swap">
+                    <input type="checkbox" />
+                    <i class="bi bi-eye swap-on"></i>
+                    <i class="bi bi-eye-slash swap-off"></i>
+                  </label>
                 </label>
-                <div class="relative">
-                  <i class="bi bi-lock absolute left-3 top-1/2 -translate-y-1/2 text-base-content/50 text-sm"></i>
-                  <input type="password" id="password"
-                    class="input input-bordered w-full bg-base-300/50 pl-8 font-mono text-xs">
-                </div>
+                <p class="validator-hint hidden">
+                  Must be more than 8 characters
+                </p>
               </div>
 
-              <div class="form-control w-full">
-                <label class="label px-1 py-0">
-                  <span class="label-text text-xs opacity-80">Retype password</span>
+              <span class="text-xs opacity-80">Retype password</span>
+              <div class="w-full">
+                <label class="input validator bg-base-300/50 w-full">
+                  <i class="bi bi-lock-fill"></i>
+                  <input type="password" required placeholder="Password" />
+                  <label class="swap">
+                    <input type="checkbox" />
+                    <i class="bi bi-eye swap-on"></i>
+                    <i class="bi bi-eye-slash swap-off"></i>
+                  </label>
                 </label>
-                <div class="relative">
-                  <i class="bi bi-lock-fill absolute left-3 top-1/2 -translate-y-1/2 text-base-content/50 text-sm"></i>
-                  <input type="password" id="retype-password"
-                    class="input input-bordered w-full bg-base-300/50 pl-8 font-mono text-xs">
-                </div>
+                <p class="validator-hint hidden">
+                  Password do not match
+                </p>
               </div>
             </div>
           </div>
@@ -333,11 +345,6 @@
             <i class="bi bi-check-circle-fill"></i> Complete
           </button>
         </div>
-
-        <div id="password-hint" class="text-xs text-error/70 mt-4 font-mono hidden">
-          <i class="bi bi-exclamation-triangle"></i> Passwords do not match
-        </div>
-
       </div>
     </div>
   </div>

@@ -14,6 +14,10 @@ const keymapContainer = document.getElementById('keymap-container');
 const localeContainer = document.getElementById('locale-container');
 const timezoneContainer = document.getElementById('timezone-container');
 
+const keymapSearch = document.getElementById('keymap-search');
+const localeSearch = document.getElementById('locale-search');
+const timezoneSearch = document.getElementById('timezone-search');
+
 const homeSizeSlider = document.getElementById('home-size-slider');
 const homeSizeValue = document.getElementById('home-size-value');
 const homeSizeMax = document.getElementById('home-size-max');
@@ -78,6 +82,18 @@ function populateContainer(container, list, name) {
   });
 }
 
+function setupSearch(searchInput, container) {
+  searchInput.addEventListener('input', function() {
+    const searchTerm = this.value.toLowerCase().trim();
+    const labels = container.querySelectorAll('label');
+
+    labels.forEach(label => {
+      const text = label.querySelector('span').textContent.toLowerCase();
+      label.style.display = text.includes(searchTerm) ? 'flex' : 'none';
+    });
+  });
+}
+
 function pageTransition(page_a, page_b) {
   page_a.style.opacity = '0';
   setTimeout(function() {
@@ -126,6 +142,10 @@ callPython('get_keymap_list');
 callPython('get_locale_list');
 callPython('get_timezone_list');
 callPython('get_free_space');
+
+setupSearch(keymapSearch, keymapContainer);
+setupSearch(localeSearch, localeContainer);
+setupSearch(timezoneSearch, timezoneContainer);
 
 setTimeout(function() {
   welcomeScreen.classList.remove('hidden');
