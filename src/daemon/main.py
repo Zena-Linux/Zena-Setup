@@ -18,6 +18,42 @@ def execute_command(args: list[str]) -> str:
     return output
 
 
+def create_user(fullname, username, homesize, password) -> str:
+    cmd = [
+        "/usr/bin/homectl",
+        "create",
+        "--password-change-now=false",
+        username,
+        "--storage=luks",
+        "--fs-type=btrfs",
+        f"--disk-size={homesize}G",
+        "--auto-resize-mode=shrink-and-grow",
+        "--member-of=wheel,users",
+        f"--real-name={fullname}",
+        "--luks-extra-mount-options=defcontext=system_u:object_r:user_home_dir_t:s0"
+    ]
+    env = {
+        "NEWPASSWORD": password,
+        **os.environ
+    }
+
+    result = subprocess.run(
+        cmd,
+        env=env,
+        capture_output=True,
+        text=True,
+    )
+
+    output = f"exit {result.returncode}\n"
+    output += result.stdout
+    output += result.stderr
+    return output
+
+
+def gb_to_gib(gigabytes):
+    return gigabytes / 1.073741824
+
+
 def handle_request(request: str) -> str:
     try:
         tokens = request.split()
@@ -28,6 +64,11 @@ def handle_request(request: str) -> str:
                 return execute_command(tokens)
             case "timedatectl":
                 return execute_command(tokens)
+            case "create-user":
+                args = request.split(" ", 1)[1].split(":", 3)
+                fullname, username, homesize, password = args
+                gib = int(gb_to_gib(int(homesize)))
+                return create_user(fullname, username, gib, password)
             case _:
                 return "error: unknown command\n"
 

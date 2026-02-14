@@ -116,3 +116,13 @@ def send_free_space(self=None):
     except Exception as e:
         print(f"Error: {e}")
         self.send_to_ui("free_space:ERROR")
+
+
+def create_user(self, args):
+    try:
+        response = send_command(f"create-user {args}")
+        print(response)
+    except subprocess.CalledProcessError as e:
+        print(f"Error getting locales: {e}")
+    except FileNotFoundError:
+        print("localectl command not found")

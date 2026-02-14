@@ -1,3 +1,5 @@
+const body = document.getElementById('body');
+
 const welcomeScreen = document.getElementById('welcome-screen');
 const step1 = document.getElementById('setup-screen-step1');
 const step2 = document.getElementById('setup-screen-step2');
@@ -19,14 +21,18 @@ const localeSearch = document.getElementById('locale-search');
 const timezoneSearch = document.getElementById('timezone-search');
 
 const userCreationForm = document.getElementById('user-creation-form');
+const fullnameInput = document.getElementById('user-fullname');
 const usernameInput = document.getElementById("user-username");
-const pwd = document.getElementById("user-password");
-const confirmPwd = document.getElementById("user-confirm-password");
+const passwordInput = document.getElementById("user-password");
+const confirmPasswordInput = document.getElementById("user-confirm-password");
 
 const homePathText = document.getElementById("home-path");
 const homeSizeSlider = document.getElementById('home-size-slider');
 const homeSizeValue = document.getElementById('home-size-value');
 const homeSizeMax = document.getElementById('home-size-max');
+
+
+const allDone = document.getElementById('all-done');
 
 function callPython(message) {
   if (window.webkit && window.webkit.messageHandlers.pythonHandler) {
@@ -58,11 +64,7 @@ window.receiveFromPython = function(text) {
     const freeSpace = parseInt(text.substring(11));
     homeSizeSlider.max = freeSpace;
     homeSizeMax.textContent = `${freeSpace} GB`;
-
-    if (parseInt(homeSizeSlider.value) > freeSpace) {
-      homeSizeSlider.value = freeSpace;
-      homeSizeValue.textContent = freeSpace;
-    }
+    homeSizeSlider.value = 64;
   }
 };
 
@@ -164,8 +166,8 @@ usernameInput.addEventListener("input", () => {
     : "/home";
 });
 
-pwd.addEventListener("input", () => {
-  confirmPwd.pattern = pwd.value;
+passwordInput.addEventListener("input", () => {
+  confirmPasswordInput.pattern = passwordInput.value;
 });
 
 document.querySelectorAll(".input.validator").forEach(wrapper => {
@@ -182,6 +184,18 @@ document.querySelectorAll(".input.validator").forEach(wrapper => {
 userCreationForm.addEventListener('submit', function(e) {
   e.preventDefault();
   console.log('Form is valid. Submission detected.');
+  pageTransition(step3, allDone);
+
+  fullname = fullnameInput.value;
+  username = usernameInput.value;
+  password = passwordInput.value;
+  homeSize = homeSizeSlider.value;
+
+  callPython(`post_user:${fullname}:${username}:${homeSize}:${password}`);
+
+  setTimeout(function() {
+    body.classList.add('opacity-0');
+  }, 2500);
 });
 
 welcomeScreen.style.opacity = '1';

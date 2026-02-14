@@ -7,8 +7,8 @@
   <link rel="stylesheet" href="css/bootstrap-icons.min.css">
 </head>
 
-<body class="bg-base-100 flex flex-col items-center justify-center p-8 text-center h-screen
-  motion-preset-fade motion-duration-1000 motion-delay-100">
+<body id="body" class="bg-base-100 flex flex-col items-center justify-center p-8 text-center h-screen
+  motion-preset-fade motion-duration-1000 motion-delay-100 transition-opacity duration-1000">
   <div class="h-screen w-full fixed flex flex-col items-center justify-end p-8">
     <img src="assets/logo.png" alt="logo" class="w-24 h-24" />
   </div>
@@ -256,7 +256,7 @@
                 <div class="w-full mb-2">
                   <label class="input validator bg-base-300/50 w-full">
                     <i class="bi bi-person"></i>
-                    <input id="user-fullname" type="text" required placeholder="Full name" minlength="3"
+                    <input id="user-fullname" type="text" required placeholder="Full name" minlength="3" pattern="[^:]*"
                       title="Must be atleast 3 characters" />
                   </label>
                   <p class="validator-hint hidden">
@@ -379,6 +379,11 @@
       </div>
     </div>
   </div>
+  <h1 id="all-done" class="text-8xl font-bold motion-preset-slide-up motion-duration-1000 motion-delay-100
+    bg-linear-to-r from-primary to-accent bg-clip-text text-transparent opacity-0 hidden">
+    All Done
+  </h1>
+
   <script src="script.js"></script>
 </body>
 

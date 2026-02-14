@@ -7,7 +7,7 @@ from pathlib import Path
 from core import (send_locale_list, send_keymap_list,
                   send_timezone_list, send_free_space,
                   apply_locale, apply_keymap,
-                  apply_timezone)
+                  apply_timezone, create_user)
 
 import gi
 gi.require_version('Gtk', '4.0')
@@ -77,6 +77,8 @@ class MainWindow(Gtk.Window):
                 GLib.idle_add(lambda: apply_timezone(self, timezone))
             case ["get_free_space"]:
                 GLib.idle_add(lambda: send_free_space(self))
+            case ["post_user", args]:
+                GLib.idle_add(lambda: create_user(self, args))
             case _:
                 print(f"Unknown request: {request}")
 
