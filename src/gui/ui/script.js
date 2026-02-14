@@ -18,6 +18,10 @@ const keymapSearch = document.getElementById('keymap-search');
 const localeSearch = document.getElementById('locale-search');
 const timezoneSearch = document.getElementById('timezone-search');
 
+const userCreationForm = document.getElementById('user-creation-form');
+const pwd = document.getElementById("user-password");
+const confirmPwd = document.getElementById("user-confirm-password");
+
 const homeSizeSlider = document.getElementById('home-size-slider');
 const homeSizeValue = document.getElementById('home-size-value');
 const homeSizeMax = document.getElementById('home-size-max');
@@ -149,6 +153,26 @@ backFromStep3.addEventListener('click', function() {
 
 homeSizeSlider.addEventListener('input', function() {
   homeSizeValue.textContent = this.value;
+});
+
+pwd.addEventListener("input", () => {
+  confirmPwd.pattern = pwd.value;
+});
+
+document.querySelectorAll(".input.validator").forEach(wrapper => {
+  const pwdInput = wrapper.querySelector('input[type="password"]');
+  const toggle = wrapper.querySelector('label.swap input[type="checkbox"]');
+
+  if (pwdInput && toggle) {
+    toggle.addEventListener("change", () => {
+      pwdInput.type = toggle.checked ? "text" : "password";
+    });
+  }
+});
+
+userCreationForm.addEventListener('submit', function(e) {
+  e.preventDefault();
+  console.log('Form is valid. Submission detected.');
 });
 
 welcomeScreen.style.opacity = '1';

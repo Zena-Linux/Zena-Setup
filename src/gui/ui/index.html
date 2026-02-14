@@ -32,7 +32,8 @@
       </p>
       <div class="grid grid-cols-1 md:grid-cols-3 gap-6 w-full mt-12">
         <div class="transition-all motion-preset-pop motion-duration-500 motion-delay-600">
-          <div class="card bg-base-200/70 border border-base-content/10 hover:scale-110 transition-transform group h-full">
+          <div
+            class="card bg-base-200/70 border border-base-content/10 hover:scale-110 transition-transform group h-full">
             <div class="card-body items-center p-5">
               <i class="text-3xl text-primary bi bi-window-dock group-hover:scale-110 transition-transform"></i>
               <h3 class="font-bold text-sm uppercase tracking-wider mt-1 group-hover:text-primary transition-colors">
@@ -46,7 +47,8 @@
         </div>
 
         <div class="transition-all motion-preset-pop motion-duration-500 motion-delay-900">
-          <div class="card bg-base-200/70 border border-base-content/10 hover:scale-110 transition-transform group h-full">
+          <div
+            class="card bg-base-200/70 border border-base-content/10 hover:scale-110 transition-transform group h-full">
             <div class="card-body items-center p-5">
               <i class="text-3xl text-accent bi bi-shield-lock group-hover:scale-110 transition-transform"></i>
               <h3 class="font-bold text-sm uppercase tracking-wider mt-1 group-hover:text-accent transition-colors">
@@ -60,7 +62,8 @@
         </div>
 
         <div class="transition-all motion-preset-pop motion-duration-500 motion-delay-1200">
-          <div class="card bg-base-200/70 border border-base-content/10 hover:scale-110 transition-transform group h-full">
+          <div
+            class="card bg-base-200/70 border border-base-content/10 hover:scale-110 transition-transform group h-full">
             <div class="card-body items-center p-5">
               <i class="text-3xl text-secondary bi bi-boxes group-hover:scale-110 transition-transform"></i>
               <h3 class="font-bold text-sm uppercase tracking-wider mt-1 group-hover:text-secondary transition-colors">
@@ -237,112 +240,135 @@
         <p class="text-base-content/60 mt-2 mb-8 text-sm">
           Enter account details. Home size is flexible.
         </p>
-
-        <div class="grid grid-cols-1 md:grid-cols-2 gap-6 w-full">
-          <div class="card bg-base-200/70 border border-base-content/10">
-            <div class="card-body p-5 text-left">
-              <div class="flex items-center gap-2 mb-4">
-                <i class="text-2xl text-primary bi bi-person"></i>
-                <h3 class="font-bold text-md uppercase tracking-wider">Account</h3>
-              </div>
-
-              <span class="text-xs opacity-80">Full name</span>
-              <div class="w-full mb-2">
-                <label class="input validator bg-base-300/50 w-full">
-                  <i class="bi bi-person"></i>
-                  <input type="text" required placeholder="Full name" minlength="3" />
-                </label>
-                <p class="validator-hint hidden">
-                  Must be atleast 3 characters
-                </p>
-              </div>
-
-              <span class="text-xs opacity-80">Username</span>
-              <div class="w-full mb-2">
-                <label class="input validator bg-base-300/50 w-full">
-                  <i class="bi bi-at"></i>
-                  <input type="text" required placeholder="Username" pattern="[A-Za-z][A-Za-z0-9\-_]*" minlength="3"
-                    maxlength="32" title="Only letters, numbers, dash or underscore" />
-                </label>
-                <p class="validator-hint hidden">
-                  Must be 3 to 32 characters
-                  <br />containing only letters, numbers, dash or underscore
-                </p>
-              </div>
-
-              <span class="text-xs opacity-80">Password</span>
-              <div class="w-full mb-2">
-                <label class="input validator bg-base-300/50 w-full">
-                  <i class="bi bi-lock"></i>
-                  <input type="password" required placeholder="Password" minlength="8" pattern=".{8,}" />
-                  <label class="swap">
-                    <input type="checkbox" />
-                    <i class="bi bi-eye swap-on"></i>
-                    <i class="bi bi-eye-slash swap-off"></i>
-                  </label>
-                </label>
-                <p class="validator-hint hidden">
-                  Must be more than 8 characters
-                </p>
-              </div>
-
-              <span class="text-xs opacity-80">Retype password</span>
-              <div class="w-full">
-                <label class="input validator bg-base-300/50 w-full">
-                  <i class="bi bi-lock-fill"></i>
-                  <input type="password" required placeholder="Password" />
-                  <label class="swap">
-                    <input type="checkbox" />
-                    <i class="bi bi-eye swap-on"></i>
-                    <i class="bi bi-eye-slash swap-off"></i>
-                  </label>
-                </label>
-                <p class="validator-hint hidden">
-                  Password do not match
-                </p>
-              </div>
-            </div>
-          </div>
-
-          <div class="card bg-base-200/70 border border-base-content/10">
-            <div class="card-body p-5 text-left">
-              <div class="flex items-center gap-2 mb-4">
-                <i class="text-2xl text-accent bi bi-house-heart"></i>
-                <h3 class="font-bold text-md uppercase tracking-wider">Home size</h3>
-              </div>
-
-              <div class="w-full py-4">
-                <div class="flex justify-between items-center mb-2">
-                  <span class="text-xs font-mono bg-base-300 px-3 py-1 rounded-full">/home</span>
-                  <span
-                    class="text-sm font-bold font-mono bg-primary/20 text-primary px-4 py-1.5 rounded-full shadow-sm">
-                    <span id="home-size-value">64</span> GB
-                  </span>
+        <form id="user-creation-form" class="w-full">
+          <div class="grid grid-cols-1 md:grid-cols-2 gap-6 w-full">
+            <div class="card bg-base-200/70 border border-base-content/10">
+              <div class="card-body p-5 text-left">
+                <div class="flex items-center gap-2 mb-4">
+                  <i class="text-2xl text-primary bi bi-person"></i>
+                  <h3 class="font-bold text-md uppercase tracking-wider">Account</h3>
                 </div>
 
-                <input type="range" id="home-size-slider" min="32" max="512" value="128" step="2"
-                  class="range range-primary range-lg w-full mt-2" />
-
-                <div class="flex justify-between text-xs px-1 mt-1 text-base-content/60 font-mono">
-                  <span>32 GB</span>
-                  <span id="home-size-max">512 GB</span>
+                <span class="text-xs opacity-80">Full name</span>
+                <div class="w-full mb-2">
+                  <label class="input validator bg-base-300/50 w-full">
+                    <i class="bi bi-person"></i>
+                    <input id="user-fullname" type="text" required placeholder="Full name" minlength="3"
+                      title="Must be atleast 3 characters" />
+                  </label>
+                  <p class="validator-hint hidden">
+                    Must be atleast 3 characters
+                  </p>
                 </div>
 
-                <div
-                  class="mt-6 flex items-center gap-2 bg-base-300/30 p-3 rounded-box border border-dashed border-base-content/20">
-                  <i class="bi bi-database text-base-content/40"></i>
-                  <p class="text-xs text-base-content/50">Encrypted home will use this capacity.</p>
+                <span class="text-xs opacity-80">Username</span>
+                <div class="w-full mb-2">
+                  <label class="input validator bg-base-300/50 w-full">
+                    <i class="bi bi-at"></i>
+                    <input id="user-username" type="text" required placeholder="Username"
+                      pattern="[A-Za-z][A-Za-z0-9\-_]*" minlength="3" maxlength="32"
+                      title="Only letters, numbers, dash or underscore" />
+                  </label>
+                  <p class="validator-hint hidden">
+                    Must be 3 to 32 characters
+                    <br />containing only letters, numbers, dash or underscore
+                  </p>
+                </div>
+
+                <span class="text-xs opacity-80">Password</span>
+                <div class="w-full mb-2">
+                  <label class="input validator bg-base-300/50 w-full">
+                    <i class="bi bi-lock"></i>
+                    <input id="user-password" type="password" required placeholder="Password" minlength="8"
+                      pattern=".{8,}" title="Must be more than 8 characters" />
+                    <label class="swap">
+                      <input type="checkbox" />
+                      <i class="bi bi-eye swap-on"></i>
+                      <i class="bi bi-eye-slash swap-off"></i>
+                    </label>
+                  </label>
+                  <p class="validator-hint hidden">
+                    Must be more than 8 characters
+                  </p>
+                </div>
+
+                <span class="text-xs opacity-80">Confirm password</span>
+                <div class="w-full">
+                  <label class="input validator bg-base-300/50 w-full">
+                    <i class="bi bi-lock-fill"></i>
+                    <input id="user-confirm-password" type="password" required placeholder="Password"
+                      title="Password do not match" />
+                    <label class="swap">
+                      <input type="checkbox" />
+                      <i class="bi bi-eye swap-on"></i>
+                      <i class="bi bi-eye-slash swap-off"></i>
+                    </label>
+                  </label>
+                  <p class="validator-hint hidden">
+                    Password do not match
+                  </p>
                 </div>
               </div>
             </div>
+
+            <div class="card bg-base-200/70 border border-base-content/10">
+              <div class="card-body p-5 text-left">
+                <div class="flex items-center gap-2 mb-4">
+                  <i class="text-2xl text-accent bi bi-house-heart"></i>
+                  <h3 class="font-bold text-md uppercase tracking-wider">Home size</h3>
+                </div>
+
+                <div class="w-full py-4">
+                  <div class="flex justify-between items-center mb-2">
+                    <span class="text-xs font-mono bg-base-300 px-3 py-1 rounded-full">/home</span>
+                    <span
+                      class="text-sm font-bold font-mono bg-primary/20 text-primary px-4 py-1.5 rounded-full shadow-sm">
+                      <span id="home-size-value">64</span> GB
+                    </span>
+                  </div>
+
+                  <input type="range" id="home-size-slider" min="32" max="512" value="128" step="2"
+                    class="range range-primary range-lg w-full mt-2" />
+
+                  <div class="flex justify-between text-xs px-1 mt-1 text-base-content/60 font-mono">
+                    <span>32 GB</span>
+                    <span id="home-size-max">512 GB</span>
+                  </div>
+
+                  <div
+                    class="mt-6 flex flex-col gap-2 bg-base-300/30 p-3 rounded-box border border-dashed border-base-content/20">
+
+                    <div class="flex items-center gap-2">
+                      <i class="bi bi-database text-base-content/40"></i>
+                      <p class="text-xs text-base-content/50">Encrypted home will use this capacity.</p>
+                    </div>
+
+                    <div class="flex items-start gap-2">
+                      <i class="bi bi-exclamation-triangle-fill text-warning"></i>
+                      <p class="text-sm text-warning font-semibold">
+                        Important: Leave at least <strong>20% of storage free</strong> for the system (system flatpaks,
+                        logs, updates, temp files).
+                      </p>
+                    </div>
+
+                    <div class="flex items-start gap-2">
+                      <i class="bi bi-info-circle text-info"></i>
+                      <p class="text-sm text-info">
+                        Note: You can change the home size after the initial setup if needed.
+                      </p>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
           </div>
-        </div>
+        </form>
 
         <div class="flex justify-between w-full mt-10">
           <button id="back-from-step3" class="btn btn-outline btn-sm font-mono gap-2">
             <i class="bi bi-arrow-left"></i> Back
           </button>
-          <button id="complete-setup"
+          <button id="complete-setup" type="submit" form="user-creation-form"
             class="btn btn-primary btn-sm font-mono gap-2 bg-linear-to-r from-primary to-accent border-0">
             <i class="bi bi-check-circle-fill"></i> Complete
           </button>
