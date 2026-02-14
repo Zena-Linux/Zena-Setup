@@ -1004,6 +1004,9 @@
       }
     }
   }
+  .fixed {
+    position: fixed;
+  }
   .label {
     @layer daisyui.l1.l2.l3 {
       display: inline-flex;
@@ -1104,6 +1107,9 @@
   .h-2 {
     height: calc(var(--spacing) * 2);
   }
+  .h-24 {
+    height: calc(var(--spacing) * 24);
+  }
   .h-60 {
     height: calc(var(--spacing) * 60);
   }
@@ -1118,6 +1124,9 @@
   }
   .w-4xl {
     width: var(--container-4xl);
+  }
+  .w-24 {
+    width: calc(var(--spacing) * 24);
   }
   .w-full {
     width: 100%;
@@ -1178,6 +1187,9 @@
   }
   .justify-center {
     justify-content: center;
+  }
+  .justify-end {
+    justify-content: flex-end;
   }
   .justify-start {
     justify-content: flex-start;
