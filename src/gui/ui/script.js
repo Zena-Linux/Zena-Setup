@@ -19,9 +19,11 @@ const localeSearch = document.getElementById('locale-search');
 const timezoneSearch = document.getElementById('timezone-search');
 
 const userCreationForm = document.getElementById('user-creation-form');
+const usernameInput = document.getElementById("user-username");
 const pwd = document.getElementById("user-password");
 const confirmPwd = document.getElementById("user-confirm-password");
 
+const homePathText = document.getElementById("home-path");
 const homeSizeSlider = document.getElementById('home-size-slider');
 const homeSizeValue = document.getElementById('home-size-value');
 const homeSizeMax = document.getElementById('home-size-max');
@@ -153,6 +155,13 @@ backFromStep3.addEventListener('click', function() {
 
 homeSizeSlider.addEventListener('input', function() {
   homeSizeValue.textContent = this.value;
+});
+
+usernameInput.addEventListener("input", () => {
+  const username = usernameInput.value.trim();
+  homePathText.textContent = username
+    ? `/home/${username}`
+    : "/home";
 });
 
 pwd.addEventListener("input", () => {

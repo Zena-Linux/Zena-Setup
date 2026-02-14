@@ -297,7 +297,7 @@
                   <label class="input validator bg-base-300/50 w-full">
                     <i class="bi bi-lock-fill"></i>
                     <input id="user-confirm-password" type="password" required placeholder="Password"
-                      title="Password do not match" />
+                      title="Password must match" />
                     <label class="swap">
                       <input type="checkbox" />
                       <i class="bi bi-eye swap-on"></i>
@@ -305,7 +305,7 @@
                     </label>
                   </label>
                   <p class="validator-hint hidden">
-                    Password do not match
+                    Password must match
                   </p>
                 </div>
               </div>
@@ -320,7 +320,7 @@
 
                 <div class="w-full py-4">
                   <div class="flex justify-between items-center mb-2">
-                    <span class="text-xs font-mono bg-base-300 px-3 py-1 rounded-full">/home</span>
+                    <span id="home-path"class="text-xs font-mono bg-base-300 px-3 py-1 rounded-full">/home</span>
                     <span
                       class="text-sm font-bold font-mono bg-primary/20 text-primary px-4 py-1.5 rounded-full shadow-sm">
                       <span id="home-size-value">64</span> GB
