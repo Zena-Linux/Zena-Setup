@@ -9,6 +9,7 @@
       "Courier New", monospace;
     --spacing: 0.25rem;
     --container-3xl: 48rem;
+    --container-4xl: 56rem;
     --text-xs: 0.75rem;
     --text-xs--line-height: calc(1 / 0.75);
     --text-sm: 0.875rem;
@@ -966,14 +967,20 @@
   .h-2 {
     height: calc(var(--spacing) * 2);
   }
+  .h-60 {
+    height: calc(var(--spacing) * 60);
+  }
+  .h-full {
+    height: 100%;
+  }
   .h-screen {
     height: 100vh;
   }
-  .max-h-72 {
-    max-height: calc(var(--spacing) * 72);
-  }
   .w-2 {
     width: calc(var(--spacing) * 2);
+  }
+  .w-4xl {
+    width: var(--container-4xl);
   }
   .w-full {
     width: 100%;
@@ -1409,9 +1416,6 @@
   }
   .motion-delay-300 {
     --motion-delay: 300ms;
-  }
-  .motion-delay-400 {
-    --motion-delay: 400ms;
   }
   .motion-delay-500 {
     --motion-delay: 500ms;

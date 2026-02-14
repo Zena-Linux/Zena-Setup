@@ -5,7 +5,9 @@ import zipfile
 import tempfile
 from pathlib import Path
 from core import (send_locale_list, send_keymap_list,
-                  send_timezone_list, send_free_space)
+                  send_timezone_list, send_free_space,
+                  apply_locale, apply_keymap,
+                  apply_timezone)
 
 import gi
 gi.require_version('Gtk', '4.0')
@@ -58,14 +60,22 @@ class MainWindow(Gtk.Window):
         request = js_result.to_string()
         print(f"Request from UI: {request}")
 
-        match request:
-            case "get_locale_list":
+        tokens = request.split(":", 1)
+
+        match tokens:
+            case ["get_locale_list"]:
                 GLib.idle_add(lambda: send_locale_list(self))
-            case "get_keymap_list":
+            case ["post_locale", locale]:
+                GLib.idle_add(lambda: apply_locale(self, locale))
+            case ["get_keymap_list"]:
                 GLib.idle_add(lambda: send_keymap_list(self))
-            case "get_timezone_list":
+            case ["post_keymap", keymap]:
+                GLib.idle_add(lambda: apply_keymap(self, keymap))
+            case ["get_timezone_list"]:
                 GLib.idle_add(lambda: send_timezone_list(self))
-            case "get_free_space":
+            case ["post_timezone", timezone]:
+                GLib.idle_add(lambda: apply_timezone(self, timezone))
+            case ["get_free_space"]:
                 GLib.idle_add(lambda: send_free_space(self))
             case _:
                 print(f"Unknown request: {request}")

@@ -69,6 +69,7 @@ function populateContainer(container, list, name) {
     const radio = document.createElement('input');
     radio.type = 'radio';
     radio.name = name;
+    radio.value = item;
     radio.className = 'radio radio-primary radio-sm';
     if (index === 0) radio.checked = true;
 
@@ -94,6 +95,11 @@ function setupSearch(searchInput, container) {
   });
 }
 
+function getSelectedRadioValue(name) {
+  const selected = document.querySelector(`input[name="${name}"]:checked`);
+  return selected ? selected.value : null;
+}
+
 function pageTransition(page_a, page_b) {
   page_a.style.opacity = '0';
   setTimeout(function() {
@@ -110,23 +116,35 @@ setupBtn.addEventListener('click', function() {
 });
 
 backFromStep1.addEventListener('click', function() {
-  pageTransition(step1, welcomeScreen)
+  pageTransition(step1, welcomeScreen);
 });
 
 nextToStep2.addEventListener('click', function() {
-  pageTransition(step1, step2)
+  pageTransition(step1, step2);
+  keymap = getSelectedRadioValue("keymap");
+  locale = getSelectedRadioValue("locale");
+  if (locale) {
+    callPython(`post_locale:${locale}`);
+  }
+  if (keymap) {
+    callPython(`post_keymap:${keymap}`);
+  }
 });
 
 backFromStep2.addEventListener('click', function() {
-  pageTransition(step2, step1)
+  pageTransition(step2, step1);
 });
 
 nextToStep3.addEventListener('click', function() {
-  pageTransition(step2, step3)
+  pageTransition(step2, step3);
+  timezone = getSelectedRadioValue("timezone");
+  if (locale) {
+    callPython(`post_timezone:${timezone}`);
+  }
 });
 
 backFromStep3.addEventListener('click', function() {
-  pageTransition(step3, step2)
+  pageTransition(step3, step2);
 });
 
 homeSizeSlider.addEventListener('input', function() {

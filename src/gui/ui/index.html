@@ -7,8 +7,7 @@
   <link rel="stylesheet" href="css/bootstrap-icons.min.css">
 </head>
 
-<body
-  class="bg-base-100 flex flex-col items-center justify-center p-8 text-center h-screen
+<body class="bg-base-100 flex flex-col items-center justify-center p-8 text-center h-screen
   motion-preset-fade motion-duration-1000 motion-delay-100">
   <div id="welcome-screen" class="max-w-3xl hidden w-full bg-base-300/80 backdrop-blur-xl border border-base-content/10
     rounded-3xl shadow-2xl p-8 md:p-10 motion-blur-in motion-translate-y-in-150 motion-ease-spring-bouncy
@@ -31,43 +30,45 @@
                                  motion-preset-slide-up motion-duration-1000 motion-delay-300">
         immutable • atomic • container-native • isolated
       </p>
-      <div class="grid grid-cols-1 md:grid-cols-3 gap-6 w-full mt-12
-                        motion-preset-slide-up motion-duration-1000 motion-delay-400">
-        <div
-          class="card bg-base-200/70 border border-base-content/10 transition-all motion-preset-pop motion-duration-500 motion-delay-600 hover:scale-110 group">
-          <div class="card-body items-center p-5">
-            <i class="text-3xl text-primary bi bi-window-dock group-hover:scale-110 transition-transform"></i>
-            <h3 class="font-bold text-sm uppercase tracking-wider mt-1 group-hover:text-primary transition-colors">
-              Desktop</h3>
-            <p class="text-xs text-base-content/80 leading-relaxed">
-              Dank Material Shell<br>
-              niri | MangoWC
-            </p>
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-6 w-full mt-12">
+        <div class="transition-all motion-preset-pop motion-duration-500 motion-delay-600">
+          <div class="card bg-base-200/70 border border-base-content/10 hover:scale-110 transition-transform group h-full">
+            <div class="card-body items-center p-5">
+              <i class="text-3xl text-primary bi bi-window-dock group-hover:scale-110 transition-transform"></i>
+              <h3 class="font-bold text-sm uppercase tracking-wider mt-1 group-hover:text-primary transition-colors">
+                Desktop</h3>
+              <p class="text-xs text-base-content/80 leading-relaxed">
+                Dank Material Shell<br>
+                niri | MangoWC
+              </p>
+            </div>
           </div>
         </div>
 
-        <div
-          class="card bg-base-200/70 border border-base-content/10 transition-all motion-preset-pop motion-duration-500 motion-delay-900 hover:scale-110 group">
-          <div class="card-body items-center p-5">
-            <i class="text-3xl text-accent bi bi-shield-lock group-hover:scale-110 transition-transform"></i>
-            <h3 class="font-bold text-sm uppercase tracking-wider mt-1 group-hover:text-accent transition-colors">
-              Security</h3>
-            <p class="text-xs text-base-content/80 leading-relaxed">
-              Encrypted Home<br>
-              Secure Boot
-            </p>
+        <div class="transition-all motion-preset-pop motion-duration-500 motion-delay-900">
+          <div class="card bg-base-200/70 border border-base-content/10 hover:scale-110 transition-transform group h-full">
+            <div class="card-body items-center p-5">
+              <i class="text-3xl text-accent bi bi-shield-lock group-hover:scale-110 transition-transform"></i>
+              <h3 class="font-bold text-sm uppercase tracking-wider mt-1 group-hover:text-accent transition-colors">
+                Security</h3>
+              <p class="text-xs text-base-content/80 leading-relaxed">
+                Encrypted Home<br>
+                Secure Boot
+              </p>
+            </div>
           </div>
         </div>
 
-        <div
-          class="card bg-base-200/70 border border-base-content/10 transition-all motion-preset-pop motion-duration-500 motion-delay-1200 hover:scale-110 group">
-          <div class="card-body items-center p-5">
-            <i class="text-3xl text-secondary bi bi-boxes group-hover:scale-110 transition-transform"></i>
-            <h3 class="font-bold text-sm uppercase tracking-wider mt-1 group-hover:text-secondary transition-colors">
-              Package Manager</h3>
-            <p class="text-xs text-base-content/80 leading-relaxed">
-              Nix | Zix
-            </p>
+        <div class="transition-all motion-preset-pop motion-duration-500 motion-delay-1200">
+          <div class="card bg-base-200/70 border border-base-content/10 hover:scale-110 transition-transform group h-full">
+            <div class="card-body items-center p-5">
+              <i class="text-3xl text-secondary bi bi-boxes group-hover:scale-110 transition-transform"></i>
+              <h3 class="font-bold text-sm uppercase tracking-wider mt-1 group-hover:text-secondary transition-colors">
+                Package Manager</h3>
+              <p class="text-xs text-base-content/80 leading-relaxed">
+                Nix | Zix
+              </p>
+            </div>
           </div>
         </div>
       </div>
@@ -80,7 +81,7 @@
     </div>
   </div>
 
-  <div id="setup-screen-step1" class="w-full hidden transition-opacity duration-500 opacity-0">
+  <div id="setup-screen-step1" class="w-4xl hidden transition-opacity duration-500 opacity-0">
     <div class="bg-base-300/80 backdrop-blur-xl border border-base-content/10 rounded-3xl shadow-2xl p-8 md:p-10">
       <div class="flex flex-col items-center text-center">
 
@@ -119,7 +120,7 @@
               </div>
 
               <div class="mt-4 px-6 bg-base-300/30 rounded-box border border-dashed border-base-content/20">
-                <div id="keymap-container" class="flex flex-col max-h-72 overflow-auto"></div>
+                <div id="keymap-container" class="flex flex-col h-60 overflow-auto"></div>
               </div>
             </div>
           </div>
@@ -140,7 +141,7 @@
               </div>
 
               <div class="mt-4 px-6 bg-base-300/30 rounded-box border border-dashed border-base-content/20">
-                <div id="locale-container" class="flex flex-col max-h-72 overflow-auto"></div>
+                <div id="locale-container" class="flex flex-col h-60 overflow-auto"></div>
               </div>
             </div>
           </div>
@@ -158,7 +159,8 @@
       </div>
     </div>
   </div>
-  <div id="setup-screen-step2" class="w-full hidden transition-opacity duration-500 opacity-0">
+
+  <div id="setup-screen-step2" class="w-4xl hidden transition-opacity duration-500 opacity-0">
     <div class="bg-base-300/80 backdrop-blur-xl border border-base-content/10 rounded-3xl shadow-2xl p-8 md:p-10">
       <div class="flex flex-col items-center text-center">
 
@@ -196,7 +198,7 @@
               </div>
 
               <div class="mt-4 px-6 bg-base-300/30 rounded-box border border-dashed border-base-content/20">
-                <div id="timezone-container" class="flex flex-col max-h-72 overflow-auto"></div>
+                <div id="timezone-container" class="flex flex-col h-60 overflow-auto"></div>
               </div>
             </div>
           </div>
@@ -215,7 +217,7 @@
     </div>
   </div>
 
-  <div id="setup-screen-step3" class="w-full hidden transition-opacity duration-500 opacity-0">
+  <div id="setup-screen-step3" class="w-4xl hidden transition-opacity duration-500 opacity-0">
     <div class="bg-base-300/80 backdrop-blur-xl border border-base-content/10 rounded-3xl shadow-2xl p-8 md:p-10">
       <div class="flex flex-col items-center text-center">
 
@@ -260,11 +262,11 @@
                 <label class="input validator bg-base-300/50 w-full">
                   <i class="bi bi-at"></i>
                   <input type="text" required placeholder="Username" pattern="[A-Za-z][A-Za-z0-9\-_]*" minlength="3"
-                    maxlength="32" title="Only letters, numbers or dash" />
+                    maxlength="32" title="Only letters, numbers, dash or underscore" />
                 </label>
                 <p class="validator-hint hidden">
                   Must be 3 to 32 characters
-                  <br />containing only letters, numbers or dash
+                  <br />containing only letters, numbers, dash or underscore
                 </p>
               </div>
 
