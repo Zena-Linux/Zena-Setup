@@ -123,6 +123,12 @@ def create_user(self, args):
         response = send_command(f"create-user {args}")
         print(response)
     except subprocess.CalledProcessError as e:
-        print(f"Error getting locales: {e}")
-    except FileNotFoundError:
-        print("localectl command not found")
+        print(f"Error creating user: {e}")
+
+
+def exit_gui():
+    try:
+        response = subprocess.run(['loginctl', 'terminate-user', 'zena-setup'])
+        print(response)
+    except subprocess.CalledProcessError as e:
+        print(f"Error exiting: {e}")

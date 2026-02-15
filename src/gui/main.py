@@ -3,21 +3,52 @@ import shutil
 import atexit
 import zipfile
 import tempfile
+import threading
 from pathlib import Path
 from core import (send_locale_list, send_keymap_list,
                   send_timezone_list, send_free_space,
                   apply_locale, apply_keymap,
-                  apply_timezone, create_user)
+                  apply_timezone, create_user, exit_gui)
+
+from ctypes import CDLL
+CDLL('libgtk4-layer-shell.so.0')
 
 import gi
 gi.require_version('Gtk', '4.0')
+gi.require_version('Gtk4LayerShell', '1.0')
 gi.require_version('WebKit', '6.0')
-from gi.repository import Gtk, Gdk, WebKit, GLib
+from gi.repository import Gtk, Gdk, Gtk4LayerShell, WebKit, GLib
+
+
+class CommandThread(threading.Thread):
+    def __init__(self, func, args=(), kwargs={}):
+        super().__init__()
+        self.func = func
+        self.args = args
+        self.kwargs = kwargs
+        self.daemon = True
+
+    def run(self):
+        try:
+            self.func(*self.args, **self.kwargs)
+        except Exception as e:
+            print(f"Thread error: {e}")
 
 
 class MainWindow(Gtk.Window):
     def __init__(self, html_uri):
         super().__init__()
+        self.thread_pool = []
+
+        Gtk4LayerShell.init_for_window(self)
+        Gtk4LayerShell.set_layer(self, Gtk4LayerShell.Layer.OVERLAY)
+        Gtk4LayerShell.set_anchor(self, Gtk4LayerShell.Edge.TOP, True)
+        Gtk4LayerShell.set_anchor(self, Gtk4LayerShell.Edge.BOTTOM, True)
+        Gtk4LayerShell.set_anchor(self, Gtk4LayerShell.Edge.LEFT, True)
+        Gtk4LayerShell.set_anchor(self, Gtk4LayerShell.Edge.RIGHT, True)
+        Gtk4LayerShell.set_exclusive_zone(self, -1)
+        Gtk4LayerShell.set_keyboard_mode(self,
+                                         Gtk4LayerShell.KeyboardMode.EXCLUSIVE)
 
         css_provider = Gtk.CssProvider()
         css_provider.load_from_data(b"""
@@ -26,14 +57,16 @@ class MainWindow(Gtk.Window):
             }
         """)
 
-        self.get_style_context().add_provider(
-            css_provider,
-            Gtk.STYLE_PROVIDER_PRIORITY_APPLICATION
-        )
+        display = Gdk.Display.get_default()
+        if display:
+            Gtk.StyleContext.add_provider_for_display(
+                display,
+                css_provider,
+                Gtk.STYLE_PROVIDER_PRIORITY_APPLICATION
+            )
 
         self.set_titlebar(None)
         self.set_decorated(False)
-        self.fullscreen()
 
         self.user_content = WebKit.UserContentManager()
         self.webview = WebKit.WebView(user_content_manager=self.user_content)
@@ -55,6 +88,26 @@ class MainWindow(Gtk.Window):
 
         self.connect("destroy", self.on_destroy)
         self.webview.connect("load-failed", self.on_load_failed)
+
+        controller = Gtk.EventControllerKey.new()
+        controller.connect("key-pressed", self.on_key_pressed)
+        self.add_controller(controller)
+
+    def on_key_pressed(self, controller, keyval, keycode, state):
+        if keyval == Gdk.KEY_q and (state & Gdk.ModifierType.ALT_MASK):
+            self.close()
+            return True
+        return False
+
+    def run_thread(self, func, *args, **kwargs):
+        thread = CommandThread(
+            func=func,
+            args=args,
+            kwargs=kwargs
+        )
+        thread.start()
+        self.thread_pool.append(thread)
+        self.thread_pool = [t for t in self.thread_pool if t.is_alive()]
 
     def on_ui_request(self, user_content, js_result):
         request = js_result.to_string()
@@ -78,7 +131,9 @@ class MainWindow(Gtk.Window):
             case ["get_free_space"]:
                 GLib.idle_add(lambda: send_free_space(self))
             case ["post_user", args]:
-                GLib.idle_add(lambda: create_user(self, args))
+                self.run_thread(create_user, self, args)
+            case ["exit"]:
+                GLib.idle_add(lambda: exit_gui())
             case _:
                 print(f"Unknown request: {request}")
 

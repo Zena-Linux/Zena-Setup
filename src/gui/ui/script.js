@@ -196,6 +196,9 @@ userCreationForm.addEventListener('submit', function(e) {
   setTimeout(function() {
     body.classList.add('opacity-0');
   }, 2500);
+  setTimeout(function() {
+    callPython('exit');
+  }, 4500);
 });
 
 welcomeScreen.style.opacity = '1';
