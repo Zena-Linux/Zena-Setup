@@ -1,6 +1,7 @@
 import os
 import socket
 import subprocess
+from pathlib import Path
 
 SOCKET_PATH = "/run/zena-setup.sock"
 
@@ -47,11 +48,8 @@ def create_user(fullname, username, homesize, password) -> str:
     output = f"exit {result.returncode}\n"
     output += result.stdout
     output += result.stderr
+    Path('/var/lib/zena-setup.done').touch()
     return output
-
-
-def gb_to_gib(gigabytes):
-    return gigabytes / 1.073741824
 
 
 def handle_request(request: str) -> str:
