@@ -217,4 +217,4 @@ setupSearch(timezoneSearch, timezoneContainer);
 
 setTimeout(function() {
   welcomeScreen.classList.remove('hidden');
-}, 1100);
+}, 500);
