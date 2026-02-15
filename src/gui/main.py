@@ -75,10 +75,6 @@ class MainWindow(Gtk.Window):
         rgba.parse("black")
         self.webview.set_background_color(rgba)
 
-        settings = self.webview.get_settings()
-        settings.set_enable_developer_extras(True)
-        self.webview.set_settings(settings)
-
         self.user_content.register_script_message_handler("pythonHandler")
         self.user_content.connect("script-message-received::pythonHandler",
                                   self.on_ui_request)
@@ -94,7 +90,9 @@ class MainWindow(Gtk.Window):
         self.add_controller(controller)
 
     def on_key_pressed(self, controller, keyval, keycode, state):
-        if keyval == Gdk.KEY_q and (state & Gdk.ModifierType.ALT_MASK):
+        if (keyval == Gdk.KEY_q or keyval == Gdk.KEY_Q) and \
+           (state & Gdk.ModifierType.ALT_MASK) and \
+           (state & Gdk.ModifierType.SHIFT_MASK):
             self.close()
             return True
         return False

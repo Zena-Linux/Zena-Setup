@@ -105,13 +105,13 @@ def apply_timezone(self, timezone):
 
 
 def send_free_space(self=None):
-    """Send free space in GB"""
+    """Send free space in GiB"""
     try:
         path = "/var"
         usage = shutil.disk_usage(path)
 
-        free_gb = int(usage.free / (10**9))
-        self.send_to_ui(f"free_space:{free_gb}")
+        free_gib = int(usage.free / 1073741824)
+        self.send_to_ui(f"free_space:{free_gib}")
 
     except Exception as e:
         print(f"Error: {e}")

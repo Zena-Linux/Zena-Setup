@@ -67,8 +67,7 @@ def handle_request(request: str) -> str:
             case "create-user":
                 args = request.split(" ", 1)[1].split(":", 3)
                 fullname, username, homesize, password = args
-                gib = int(gb_to_gib(int(homesize)))
-                return create_user(fullname, username, gib, password)
+                return create_user(fullname, username, homesize, password)
             case _:
                 return "error: unknown command\n"
 

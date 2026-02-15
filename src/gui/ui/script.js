@@ -63,7 +63,7 @@ window.receiveFromPython = function(text) {
   else if (text.startsWith("free_space:")) {
     const freeSpace = parseInt(text.substring(11));
     homeSizeSlider.max = freeSpace;
-    homeSizeMax.textContent = `${freeSpace} GB`;
+    homeSizeMax.textContent = `${freeSpace} GiB`;
     homeSizeSlider.value = 64;
   }
 };
