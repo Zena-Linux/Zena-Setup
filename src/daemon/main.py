@@ -23,6 +23,7 @@ def create_user(fullname, username, homesize, password) -> str:
     cmd = [
         "/usr/bin/homectl",
         "create",
+        "--enforce-password-policy=no",
         "--password-change-now=false",
         username,
         "--storage=luks",
