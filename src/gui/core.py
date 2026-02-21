@@ -128,7 +128,7 @@ def create_user(self, args):
 
 def exit_gui():
     try:
-        response = subprocess.run(['loginctl', 'terminate-user', 'zena-setup'])
+        response = subprocess.run(['pkill', '-u', 'zena-setup', 'niri'])
         print(response)
     except subprocess.CalledProcessError as e:
         print(f"Error exiting: {e}")
