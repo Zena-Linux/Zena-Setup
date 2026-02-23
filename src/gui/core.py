@@ -1,3 +1,4 @@
+import sys
 import socket
 import shutil
 import subprocess
@@ -126,9 +127,10 @@ def create_user(self, args):
         print(f"Error creating user: {e}")
 
 
-def exit_gui():
+def exit_setup():
     try:
-        response = subprocess.run(['pkill', '-u', 'zena-setup', 'niri'])
+        response = send_command("exit")
+        sys.exit(0)
         print(response)
     except subprocess.CalledProcessError as e:
-        print(f"Error exiting: {e}")
+        print(f"Error exit: {e}")

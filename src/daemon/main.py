@@ -1,4 +1,5 @@
 import os
+import time
 import socket
 import subprocess
 from pathlib import Path
@@ -53,6 +54,21 @@ def create_user(fullname, username, homesize, password) -> str:
     return output
 
 
+def exit_setup():
+    try:
+        subprocess.run(['pkill', '-u', 'zena-setup', 'niri'])
+        time.sleep(1)
+        subprocess.run(['userdel', '-r', 'zena-setup'])
+        subprocess.Popen(
+            ['systemctl', 'reboot'],
+            stdout=subprocess.DEVNULL,
+            stderr=subprocess.DEVNULL
+        )
+
+    except subprocess.CalledProcessError as e:
+        print(f"Error exiting: {e}")
+
+
 def handle_request(request: str) -> str:
     try:
         tokens = request.split()
@@ -67,6 +83,8 @@ def handle_request(request: str) -> str:
                 args = request.split(" ", 1)[1].split(":", 3)
                 fullname, username, homesize, password = args
                 return create_user(fullname, username, homesize, password)
+            case "exit":
+                exit_setup()
             case _:
                 return "error: unknown command\n"
 

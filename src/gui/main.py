@@ -8,7 +8,7 @@ from pathlib import Path
 from core import (send_locale_list, send_keymap_list,
                   send_timezone_list, send_free_space,
                   apply_locale, apply_keymap,
-                  apply_timezone, create_user, exit_gui)
+                  apply_timezone, create_user, exit_setup)
 
 from ctypes import CDLL
 CDLL('libgtk4-layer-shell.so.0')
@@ -131,7 +131,7 @@ class MainWindow(Gtk.Window):
             case ["post_user", args]:
                 self.run_thread(create_user, self, args)
             case ["exit"]:
-                GLib.idle_add(lambda: exit_gui())
+                GLib.idle_add(lambda: exit_setup())
             case _:
                 print(f"Unknown request: {request}")
 
