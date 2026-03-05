@@ -31,9 +31,9 @@ def create_user(fullname, username, homesize, password) -> str:
         "--fs-type=btrfs",
         f"--disk-size={homesize}G",
         "--auto-resize-mode=shrink-and-grow",
-        "--member-of=wheel,users",
+        "--member-of=wheel,users,libvirt,kvm",
         f"--real-name={fullname}",
-        "--luks-extra-mount-options=defcontext=system_u:object_r:user_home_dir_t:s0"
+        "--luks-extra-mount-options=acl,compress=zstd,user_subvol_rm_allowed,defcontext=system_u:object_r:user_home_dir_t:s0"
     ]
     env = {
         "NEWPASSWORD": password,
