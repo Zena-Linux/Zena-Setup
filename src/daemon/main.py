@@ -20,37 +20,63 @@ def execute_command(args: list[str]) -> str:
     return output
 
 
+import os
+import subprocess
+from pathlib import Path
+
+
 def create_user(fullname, username, homesize, password) -> str:
-    cmd = [
-        "/usr/bin/homectl",
-        "create",
-        "--enforce-password-policy=no",
-        "--password-change-now=false",
-        username,
-        "--storage=luks",
-        "--fs-type=btrfs",
-        f"--disk-size={homesize}G",
-        "--auto-resize-mode=shrink-and-grow",
-        "--member-of=wheel,users,libvirt,kvm",
-        f"--real-name={fullname}",
-        "--luks-extra-mount-options=acl,compress=zstd,user_subvol_rm_allowed,defcontext=system_u:object_r:user_home_dir_t:s0"
-    ]
-    env = {
-        "NEWPASSWORD": password,
-        **os.environ
-    }
+    output = ""
 
-    result = subprocess.run(
-        cmd,
-        env=env,
-        capture_output=True,
-        text=True,
-    )
+    try:
+        subprocess.run(
+            ["/usr/sbin/setenforce", "0"],
+            check=False,
+            capture_output=True,
+            text=True,
+        )
 
-    output = f"exit {result.returncode}\n"
-    output += result.stdout
-    output += result.stderr
-    Path('/var/lib/zena-setup.done').touch()
+        cmd = [
+            "/usr/bin/homectl",
+            "create",
+            "--enforce-password-policy=no",
+            "--password-change-now=false",
+            username,
+            "--storage=luks",
+            "--fs-type=btrfs",
+            f"--disk-size={homesize}G",
+            "--auto-resize-mode=shrink-and-grow",
+            "--member-of=wheel,users,libvirt,kvm",
+            f"--real-name={fullname}",
+            "--luks-extra-mount-options=acl,compress=zstd,user_subvol_rm_allowed,defcontext=system_u:object_r:user_home_dir_t:s0"
+        ]
+
+        env = {
+            "NEWPASSWORD": password,
+            **os.environ
+        }
+
+        result = subprocess.run(
+            cmd,
+            env=env,
+            capture_output=True,
+            text=True,
+        )
+
+        output += f"exit {result.returncode}\n"
+        output += result.stdout
+        output += result.stderr
+
+    finally:
+        subprocess.run(
+            ["/usr/sbin/setenforce", "1"],
+            check=False,
+            capture_output=True,
+            text=True,
+        )
+
+        Path("/var/lib/zena-setup.done").touch()
+
     return output
 
 
