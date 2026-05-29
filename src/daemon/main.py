@@ -74,6 +74,12 @@ def create_user(fullname, username, homesize, password) -> str:
             capture_output=True,
             text=True,
         )
+        subprocess.run(
+            ["/usr/bin/restorecon", "-RFv", "/var/home"],
+            check=False,
+            capture_output=True,
+            text=True,
+        )
 
         Path("/var/lib/zena-setup.done").touch()
 
