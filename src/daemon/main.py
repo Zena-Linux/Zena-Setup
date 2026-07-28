@@ -20,11 +20,6 @@ def execute_command(args: list[str]) -> str:
     return output
 
 
-import os
-import subprocess
-from pathlib import Path
-
-
 def create_user(fullname, username, homesize, password) -> str:
     output = ""
 
@@ -48,7 +43,7 @@ def create_user(fullname, username, homesize, password) -> str:
             "--auto-resize-mode=shrink-and-grow",
             "--member-of=wheel,users,libvirt,kvm",
             f"--real-name={fullname}",
-            "--luks-extra-mount-options=acl,compress=zstd,user_subvol_rm_allowed,defcontext=system_u:object_r:user_home_dir_t:s0"
+            "--luks-extra-mount-options=acl,compress=zstd,user_subvol_rm_allowed"
         ]
 
         env = {
