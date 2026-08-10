@@ -24,13 +24,6 @@ def create_user(fullname, username, homesize, password) -> str:
     output = ""
 
     try:
-        subprocess.run(
-            ["/usr/sbin/setenforce", "0"],
-            check=False,
-            capture_output=True,
-            text=True,
-        )
-
         cmd = [
             "/usr/bin/homectl",
             "create",
@@ -63,19 +56,6 @@ def create_user(fullname, username, homesize, password) -> str:
         output += result.stderr
 
     finally:
-        subprocess.run(
-            ["/usr/sbin/setenforce", "1"],
-            check=False,
-            capture_output=True,
-            text=True,
-        )
-        subprocess.run(
-            ["/usr/bin/restorecon", "-RFv", "/var/home"],
-            check=False,
-            capture_output=True,
-            text=True,
-        )
-
         Path("/var/lib/zena-setup.done").touch()
 
     return output
